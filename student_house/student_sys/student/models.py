@@ -14,6 +14,7 @@ class Student(models.Model):
         (1, '通过'),
         (2, '拒绝'),
     ]
+
     name = models.CharField(max_length=128, verbose_name='姓名')
     sex = models.IntegerField(choices=SEX_ITEMS, verbose_name='性别')
     profession = models.CharField(max_length=128, verbose_name='职业')
