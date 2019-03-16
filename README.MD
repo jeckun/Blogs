@@ -8,4 +8,6 @@
 
 这个系统主要应用场景是学员在线注册，后台管理老师进行审批。并且前端可以查看哪些学员以及注册成功。
 
+[学员管理系统](https://github.com/jeckun/Blogs/tree/master/student_house/student_sys)
+
 ## 第一个网页
