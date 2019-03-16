@@ -1,8 +1,6 @@
 from django.shortcuts import render
 from .models import Student
 
-# Create your views here.
-
 
 def index(request):
     # v1: 实现传递一个单词到index页面进行渲染
