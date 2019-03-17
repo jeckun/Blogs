@@ -10,3 +10,12 @@
 
 
 ![后端](https://github.com/jeckun/Django_test/blob/master/student_house/student_sys/student/image/stu_admin.png)
+
+## 创建学员管理系统站点
+
+"""
+$ mkdir student_house
+$ cd student_house && django-admin startproject student_sys
+$ cd student_house/student_sys
+$ python manage.py startapp student
+"""

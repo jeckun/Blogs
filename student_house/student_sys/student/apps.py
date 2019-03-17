@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class StudentConfig(AppConfig):
-    name = 'student'
+# class StudentConfig(AppConfig):
+#     name = 'student'
 
