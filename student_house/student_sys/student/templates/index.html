@@ -1,25 +1,112 @@
 <!DOCTYPE html>
-<html lang="zh-hans">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
     <title>学员管理系统</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="jumbotron.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 
 <body>
-    Hellow {{ words }} {{ student_name }}
-    <h3><a href="/admin/">Admin</a></h3>
-    <hr/>
-    <form action="/" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="提交" />
-    </form>
-    <hr/>
-    <ul>
-        {% for student in students %}
-            <li>{{ student.name }} - {{ student.get_status_display }}</li>
-        {% endfor %}
-    </ul>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">学员管理系统</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <a class="btn btn-success" href="/admin/">管理员</a>
+          </form>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h3>简介：</h3>
+        <p>这是一个学员报名的演示系统，主要应用场景是学员在线注册，后台管理老师进行审批。并且前端可以查看哪些学员以及注册成功。</p>
+      </div>
+    </div>
+
+    <div class="container">
+        <form class="form-table" action="/" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                姓名： {{ form.name }}
+                性别： {{ form.sex }}
+                职业： {{ form.profession }}
+                Email： {{ form.email }}
+                QQ： {{ form.qq }}
+                电话： {{ form.phone }}
+            </div>
+            <div class="form-group">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">提交</button>
+            </div>
+        </form>
+    </div> <!-- /container -->
+
+    <div class="container">
+        <table class="table">
+          <caption>已报名学员名单</caption>
+          <thead>
+            <tr>
+              <th>姓名</th>
+              <th>性别</th>
+              <th>职业</th>
+              <th>邮箱</th>
+              <th>状态</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.get_sex_display }}</td>
+                <td>{{ student.profession }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.get_status_display}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div><!-- /container -->
+
 </body>
 
 </html>

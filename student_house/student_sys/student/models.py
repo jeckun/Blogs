@@ -4,6 +4,7 @@ from django.db import models
 
 
 class Student(models.Model):
+    __name__ = '学员'
     SEX_ITEMS = [
         (1, '男'),
         (2, '女'),
