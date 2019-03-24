@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'student.middleware.TimeItMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -120,3 +121,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+#
+
+# DJANGO_SETTINGS_MODULE = None

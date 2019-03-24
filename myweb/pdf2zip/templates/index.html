@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <div class="head">
+        <h1>{{ name }}</h1>
+        <h2>您好，来自{{ ip }} 的朋友， {{ message }}</h2>
+    </div>
+    <div class="upload">
+        <h2>请上传您需要压缩的文件</h2>
+        <form enctype="multipart/form-data" action="/uploadFile/" method="post">
+            {% csrf_token %}
+            <input type="file" name="myfile" />
+            <input type="submit" value="上传"/>
+        </form>
+    </div>
+    <div class="inf">
+        <h2> {{ inf }} </h2>
+    </div>
+    {% if upload == True %}
+        <h2>上传成功！</h2>
+        <form enctype="multipart/form-data" action="/CompressionFile/" method="post">
+            {% csrf_token %}
+            <input type="submit" value="压缩"/>
+        </form>
+
+    {% endif %}
+    <p>
+
+    {% for car in car_list %}
+        <li>
+            {{ car.brand }}
+        </li>
+    {% endfor %}
+
+</body>
+</html>
