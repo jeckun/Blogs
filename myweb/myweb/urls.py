@@ -16,12 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from pdf2zip.views import index, upload_file, compression_file
+from pdf2zip.views import index, upload, compression
+from pdf2zip.views_2 import index, compression
 
 
 urlpatterns = [
-    path('', index, name='index'),
-    path('CompressionFile/', compression_file, name='CompressionFile'),
-    path('uploadFile/', upload_file, name='upload'),
+    path('', index.as_view(), name='index'),
+    path('Compression/', compression, name='compress'),
+    # path('upload/', upload, name='upload'),
     path('admin/', admin.site.urls),
 ]

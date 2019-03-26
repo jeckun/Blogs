@@ -12,10 +12,10 @@ class Compression_log(models.Model):
     __name__ = '压缩日志'
 
     STEP_ITEMS = [
-        (0, '请上传待压缩的PDF文件'),
-        (1, '上传成功，待压缩'),
-        (2, '压缩成功，待下载'),
-        (3, '下载成功，完成！'),
+        (0, '初始状态'),
+        (1, '上传成功'),
+        (2, '压缩成功'),
+        (3, '下载成功'),
     ]
 
     ip = models.CharField(max_length=100, verbose_name='ip地址')

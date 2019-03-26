@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from django.views import View
 
 import os
 
 from .models import Compression_log
-
 
 context = {
     'title': 'Pdf2zip | We provide PDF compression services',
@@ -30,7 +30,7 @@ def index(request):
     return render(request, "index.html", context=context)
 
 
-def upload_file(request):
+def upload(request):
     global context
     if request.method == "POST":    # 请求方法为POST时，进行处理
         myFile = request.FILES.get("myfile", None)    # 获取上传的文件，如果没有文件，则默认为None
@@ -46,12 +46,18 @@ def upload_file(request):
         context['inf'] = ('上传%s成功！' % myFile.name)
         context['upload'] = True
 
-        return render(request, "index.html", context=context)
+        # return render(request, "index.html", context=context)
+        return HttpResponseRedirect(reverse('index'))
 
 
-def compression_file(request):
+def compression(request):
     context['inf'] = '压缩成功!'
     context['upload'] = False
     # return render(request, "index.html", context=context)
     return HttpResponseRedirect(reverse('index'))
 
+
+def download(request):
+    context['inf'] = '下载成功！'
+    context['upload'] = False
+    return HttpResponseRedirect(reverse('index'))
