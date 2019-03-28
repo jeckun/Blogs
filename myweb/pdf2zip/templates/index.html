@@ -31,7 +31,10 @@
             {% for file in filelist %}
                 <input type="radio" name="filename" value="{{ file }}">{{ file }}<br>
             {% endfor %}
-            <input type="submit" value="压缩"/>
+            <input type="submit" name="compress" value="压缩"/>
+            <input type="submit" name="delete" value="删除"/>
+            <p>Setp3: 选择压缩后文件，点击下载</p>
+            <input type="submit" name="download" value="下载"/>
         </form>
         {% endif %}
     </div>
