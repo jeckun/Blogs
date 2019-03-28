@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from pdf2zip.views_bak import index, upload, compression
+# from pdf2zip.views_bak import index, upload, compression
 from pdf2zip.views import index, compression
 
 
