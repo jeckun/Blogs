@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import FileResponse, HttpResponse, HttpResponseRedirect
+from django.utils.http import urlquote
 from django.urls import reverse
 from django.views import View
 
@@ -103,6 +104,12 @@ def compression(request):
         elif 'download' in request.POST:
             print('download %s' % filename)
             context['inf'] = '开始下载%s！' % filename
+            file=open(file, 'rb')
+            response = FileResponse(file)
+            response['Content-Type'] = 'application/octet-stream'
+            response['Content-Disposition'] = 'attachment;filename={0}'.format(urlquote(filename))
+            return response
+
         else:
             pass
 
@@ -110,3 +117,4 @@ def compression(request):
         get_filelist(path)
 
         return HttpResponseRedirect(reverse('index'))
+
