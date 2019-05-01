@@ -4,9 +4,9 @@ import sys
 
 
 if __name__ == '__main__':
-    # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'student_sys.settings')
+    # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'student_sys.settings1111')
     profile = os.environ.get('PROJECT_PROFILE', 'develop')
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'student_sys.settings.%s' % profile)
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'student_sys.settings1111.%s' % profile)
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
