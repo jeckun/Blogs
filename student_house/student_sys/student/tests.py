@@ -5,22 +5,22 @@ from .models import Student
 class StudentTestCase(TestCase):
     def setUp(self):
         Student.objects.create(
-            name = 'the5fire',
-            sex = 1,
-            email = 'nobody@the5fire.com',
-            profession = '程序员',
-            qq = '3333',
-            phone = '32232323',
+            name='the5fire',
+            sex=1,
+            email='nobody@the5fire.com',
+            profession='程序员',
+            qq='3333',
+            phone='32232323',
         )
 
     def test_create_and_sex_show(self):
         student = Student.objects.create(
-            name = 'huyang',
-            sex = 1,
-            email = 'nobody@dd.com',
-            profession = '程序员',
-            qq = '2323',
-            phone = '12123123123',
+            name='huyang',
+            sex=1,
+            email='nobody@dd.com',
+            profession='程序员',
+            qq='2323',
+            phone='12123123123',
         )
         self.assertEqual(student.sex_show, '男', '性别字段内容与展示不一致！')
 
@@ -49,7 +49,7 @@ class StudentTestCase(TestCase):
             name='test_for_post',
             sex=1,
             email='2323@dd.com',
-            profession='程序员',11
+            profession='程序员',
             qq='42323',
             phone='232312',
         )
@@ -58,5 +58,3 @@ class StudentTestCase(TestCase):
 
         response = client.get('/')
         self.assertEqual(b'test_for_post' in response.content, "response content msut contain 'test_for_post' ")
-
-
