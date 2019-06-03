@@ -13,6 +13,7 @@ class PostInline(admin.TabularInline):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
+    # 分类管理
     inlines = [PostInline, ]
 
     list_display = ('name', 'status', 'is_nav', 'owner', 'created_time', 'post_count')
@@ -30,6 +31,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
+    # 标签管理
     list_display = ('name', 'status', 'owner', 'created_time')
     fields = ('name', 'status')
     list_filter = ('status', 'created_time')
@@ -56,6 +58,7 @@ class CategoryOwnerFilter(admin.SimpleListFilter):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
+    # 文章管理
     form = PostAdminForm
 
     list_display = ('title', 'category', 'desc',  'status', 'created_time', 'owner', 'operator')
@@ -80,22 +83,27 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ('title', 'category__name')
 
     list_display_links = []
+
     # 动作相关显示位置
     actions_on_top = True
     actions_on_bottom = True
+
     # 编辑保存显示位置
     save_on_top = True
     save_on_bottom = True
 
     def save_model(self, request, obj, form, change):
+        """ 确保保存时候写入作者 """
         obj.owner = request.user
         return super(PostAdmin, self).save_model(request, obj, form, change)
 
     def get_queryset(self, request):
+        """ 查询时只看本人创建的 """
         qu = super(PostAdmin, self).get_queryset(request)
         return qu.filter(owner=request.user)
 
     def operator(self, obj):
+        """ 点击编辑操作时直接打开对于页面进行编辑 """
         return format_html(
             '<a href="{}">编辑</a>',
             reverse('admin:blog_post_change', args=(obj.id,))
