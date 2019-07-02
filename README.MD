@@ -1,13 +1,11 @@
-# 学习Django
+# 启动顺序
 
-## 参考书
+## 进入虚拟环境
 
-胡阳 《Django 企业开发实战》
+$ source venv/bin/activate
+(venv) $
 
-## 第一个系统：学员管理系统
+## 启动学员管理系统
 
-这个系统主要应用场景是学员在线注册，后台管理老师进行审批。并且前端可以查看哪些学员以及注册成功。
-
-[学员管理系统](https://github.com/jeckun/Blogs/tree/master/student_house/student_sys)
-
-## 第二个：
+(venv) $ cd student_house/student_house
+(venv) $ python manage.py runserver
