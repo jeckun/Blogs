@@ -4,6 +4,7 @@ from .models import Link, SideBar
 
 @admin.register(Link)
 class LinkAdmin(admin.ModelAdmin):
+    """友链"""
     list_display = ('title', 'weight', 'href', 'status', 'owner', 'created_time')
     fields = ('title', 'weight', 'href')
     list_filter = ('status', 'created_time')
@@ -15,6 +16,7 @@ class LinkAdmin(admin.ModelAdmin):
 
 @admin.register(SideBar)
 class SideBarAdmin(admin.ModelAdmin):
+    """侧边栏"""
     list_display = ('title', 'display_type', 'content', 'status', 'owner', 'created_time')
     fields = ('title', 'display_type', 'content')
     list_filter = ('status', 'created_time')

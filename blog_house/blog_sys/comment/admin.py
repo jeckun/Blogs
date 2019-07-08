@@ -1,9 +1,12 @@
 from django.contrib import admin
 from .models import Comment
 
+from blog.AdminSite import custom_site
 
-@admin.register(Comment)
+
+@admin.register(Comment, site=custom_site)
 class CommentAdmin(admin.ModelAdmin):
+    """评论"""
     list_display = ('target', 'content', 'nickname', 'website', 'email', 'status', 'created_time')
     fields = ('target', 'content', 'nikename', 'website', 'email')
     list_filter = ('status', 'created_time')

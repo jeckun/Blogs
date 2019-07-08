@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.utils.html import format_html
 from .models import Category, Tag, Post
 from .adminforms import PostAdminForm
+from .AdminSite import custom_site
 
 
 class PostInline(admin.TabularInline):
@@ -11,7 +12,7 @@ class PostInline(admin.TabularInline):
     model = Post
 
 
-@admin.register(Category)
+@admin.register(Category, site=custom_site)
 class CategoryAdmin(admin.ModelAdmin):
     # 分类管理
     inlines = [PostInline, ]
@@ -29,7 +30,7 @@ class CategoryAdmin(admin.ModelAdmin):
     post_count.short_description = '文章数量'
 
 
-@admin.register(Tag)
+@admin.register(Tag, site=custom_site)
 class TagAdmin(admin.ModelAdmin):
     # 标签管理
     list_display = ('name', 'status', 'owner', 'created_time')
@@ -56,9 +57,12 @@ class CategoryOwnerFilter(admin.SimpleListFilter):
         return queryset
 
 
-@admin.register(Post)
+@admin.register(Post, site=custom_site)
 class PostAdmin(admin.ModelAdmin):
     # 文章管理
+
+    # 引用自定义Form
+    # 将文章的描述字段换为文本框
     form = PostAdminForm
 
     list_display = ('title', 'category', 'desc',  'status', 'created_time', 'owner', 'operator')
@@ -70,7 +74,7 @@ class PostAdmin(admin.ModelAdmin):
             'fields': (('title', 'category'), 'status',),
         }),
         ('内容', {
-            'fields': ('desc', 'content',),
+            'fields': ('content', 'desc',),
         }),
         ('额外信息', {
             'classes': ('collapse',),
@@ -106,12 +110,14 @@ class PostAdmin(admin.ModelAdmin):
         """ 点击编辑操作时直接打开对于页面进行编辑 """
         return format_html(
             '<a href="{}">编辑</a>',
-            reverse('admin:blog_post_change', args=(obj.id,))
+            # reverse('admin:blog_post_change', args=(obj.id,))
+            reverse('cus_admin:blog_post_change', args=(obj.id,))
         )
     operator.short_description = '操作'
 
-    # class Media:
-    #     css = {
-    #         'all': ("https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css", ),
-    #     }
-    #     js = ('https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.js', )
+    class Media:
+        # 定义静态资源
+        css = {
+            # 'all': ("https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css", ),
+        }
+        # js = ('https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.js', )
