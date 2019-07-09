@@ -1,45 +1,55 @@
 from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
+
 from .models import Category, Tag, Post
 from .adminforms import PostAdminForm
-from .AdminSite import custom_site
+from .custom_site import custom_site
+from .base_admin import BaseOwnerAdmin
 
 
-class PostInline(admin.TabularInline):
+# class PostInline(admin.TabularInline):
+class PostInline(admin.StackedInline):    # 换一种显示样式
     fields = ('title', 'desc')
     extra = 1
     model = Post
 
 
 @admin.register(Category, site=custom_site)
-class CategoryAdmin(admin.ModelAdmin):
+# class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(BaseOwnerAdmin):
     # 分类管理
+
     inlines = [PostInline, ]
 
     list_display = ('name', 'status', 'is_nav', 'owner', 'created_time', 'post_count')
     fields = ('name', 'status', 'is_nav')
+
     list_filter = ('status', 'created_time')
 
-    def save_model(self, request, obj, form, change):
-        obj.owner = request.user
-        return super(CategoryAdmin, self).save_model(request, obj, form, change)
+    # 已经在基类实现
+    # def save_model(self, request, obj, form, change):
+    #     obj.owner = request.user
+    #     return super(CategoryAdmin, self).save_model(request, obj, form, change)
 
     def post_count(self, obj):
         return obj.post_set.count()
+
     post_count.short_description = '文章数量'
 
 
 @admin.register(Tag, site=custom_site)
-class TagAdmin(admin.ModelAdmin):
+# class TagAdmin(admin.ModelAdmin):
+class TagAdmin(BaseOwnerAdmin):
     # 标签管理
     list_display = ('name', 'status', 'owner', 'created_time')
     fields = ('name', 'status')
     list_filter = ('status', 'created_time')
 
-    def save_model(self, request, obj, form, change):
-        obj.owner = request.user
-        return super(TagAdmin, self).save_model(request, obj, form, change)
+    # 基类已经实现
+    # def save_model(self, request, obj, form, change):
+    #     obj.owner = request.user
+    #     return super(TagAdmin, self).save_model(request, obj, form, change)
 
 
 class CategoryOwnerFilter(admin.SimpleListFilter):
@@ -58,7 +68,8 @@ class CategoryOwnerFilter(admin.SimpleListFilter):
 
 
 @admin.register(Post, site=custom_site)
-class PostAdmin(admin.ModelAdmin):
+# class PostAdmin(admin.ModelAdmin):
+class PostAdmin(BaseOwnerAdmin):
     # 文章管理
 
     # 引用自定义Form
@@ -66,6 +77,8 @@ class PostAdmin(admin.ModelAdmin):
     form = PostAdminForm
 
     list_display = ('title', 'category', 'desc',  'status', 'created_time', 'owner', 'operator')
+
+    exclude = ['owner', ]
 
     # fields = (('title', 'category', 'status'), 'desc', 'content', 'tag')
     fieldsets = (
@@ -96,15 +109,17 @@ class PostAdmin(admin.ModelAdmin):
     save_on_top = True
     save_on_bottom = True
 
-    def save_model(self, request, obj, form, change):
-        """ 确保保存时候写入作者 """
-        obj.owner = request.user
-        return super(PostAdmin, self).save_model(request, obj, form, change)
+    # 已经在基类实现
+    # def save_model(self, request, obj, form, change):
+    #     """ 确保保存时候写入作者 """
+    #     obj.owner = request.user
+    #     return super(PostAdmin, self).save_model(request, obj, form, change)
 
-    def get_queryset(self, request):
-        """ 查询时只看本人创建的 """
-        qu = super(PostAdmin, self).get_queryset(request)
-        return qu.filter(owner=request.user)
+    # 已经在基类实现
+    # def get_queryset(self, request):
+    #     """ 查询时只看本人创建的 """
+    #     qu = super(PostAdmin, self).get_queryset(request)
+    #     return qu.filter(owner=request.user)
 
     def operator(self, obj):
         """ 点击编辑操作时直接打开对于页面进行编辑 """
