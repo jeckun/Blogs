@@ -10,6 +10,7 @@ from .base_admin import BaseOwnerAdmin
 
 # class PostInline(admin.TabularInline):
 class PostInline(admin.StackedInline):    # 换一种显示样式
+    # 单独定义的页面，包含文章的标题和摘要
     fields = ('title', 'desc')
     extra = 1
     model = Post
@@ -20,11 +21,16 @@ class PostInline(admin.StackedInline):    # 换一种显示样式
 class CategoryAdmin(BaseOwnerAdmin):
     # 分类管理
 
-    inlines = [PostInline, ]
+    # 将文章标题和摘要嵌入每一个子分类下
+    inlines = (PostInline, )
 
+    # 列表状态显示的字段
     list_display = ('name', 'status', 'is_nav', 'owner', 'created_time', 'post_count')
+
+    # 编辑页面上显示的字段
     fields = ('name', 'status', 'is_nav')
 
+    # 列表状态过滤器用来筛选的字段
     list_filter = ('status', 'created_time')
 
     # 已经在基类实现
@@ -33,6 +39,7 @@ class CategoryAdmin(BaseOwnerAdmin):
     #     return super(CategoryAdmin, self).save_model(request, obj, form, change)
 
     def post_count(self, obj):
+        # 统计分类下文章数量
         return obj.post_set.count()
 
     post_count.short_description = '文章数量'
@@ -78,7 +85,7 @@ class PostAdmin(BaseOwnerAdmin):
 
     list_display = ('title', 'category', 'desc',  'status', 'created_time', 'owner', 'operator')
 
-    exclude = ['owner', ]
+    exclude = ('owner', )
 
     # fields = (('title', 'category', 'status'), 'desc', 'content', 'tag')
     fieldsets = (
