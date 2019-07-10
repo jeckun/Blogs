@@ -52,6 +52,10 @@ from .models import Post, Tag, Category, Link
 标签列表页： 127.0.0.1/tag/<tag_id>
 友链列表页： 127.0.0.1/link/<link_id>
 
-2) 修改URL路由
+2) 创建View函数
+blog.views
+return render(request, 'blog/detail.html', context={'name': 'post_list'})
 
-3）创建View函数
+3) 挂接模板
+
+3) 修改URL路由
