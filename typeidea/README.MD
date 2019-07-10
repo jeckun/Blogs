@@ -59,3 +59,4 @@ return render(request, 'blog/detail.html', context={'name': 'post_list'})
 3) 挂接模板
 
 3) 修改URL路由
+
