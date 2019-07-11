@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Tag, Category, Link
+from .models import Post, Tag, Category, Link, Comment, SideBar
 
 # Register your models here.
 
@@ -102,4 +102,18 @@ class PostAdmin(BaseOwnerAdmin):
     #     obj.owner = request.user
     #     return super(PostAdmin, self).save_model(request, obj, form, change)
 
-# admin.site.register(Post, PostAdmin)
+
+@admin.register(Comment)
+class CommentAdmin(BaseOwnerAdmin):
+    """评论"""
+    list_display = ('target', 'content', 'nickname', 'website', 'email', 'status', 'created_time')
+    fields = ('target', 'content', 'nikename', 'website', 'email')
+    list_filter = ('status', 'created_time')
+
+
+@admin.register(SideBar)
+class SideBarAdmin(BaseOwnerAdmin):
+    """侧边栏"""
+    list_display = ('title', 'display_type', 'content', 'status', 'owner', 'created_time')
+    fields = ('title', 'display_type', 'content')
+    list_filter = ('status', 'created_time')
