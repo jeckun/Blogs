@@ -1,0 +1,9 @@
+<h1>Class PostDetailView</h1>
+{% if post %}
+<hi>{{ post.title }}</hi>
+<div>
+    <span>分类：{{ post.category.name }}</span>
+    <span>作者：{{ post.owner.username }}</span>
+</div>
+<p>{{ post.content }}</p>
+{% endif %}

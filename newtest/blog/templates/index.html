@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+
+<h1>测试页</h1>
+
+{% if nav %}
+    <h4>{{ nav }}</h4>
+{% endif %}
+<ul>
+{% for post in posts %}
+    <li>
+        <div>
+            <span>标题：{{ post.title }}</span>
+        </div>
+        <div>
+            <span>摘要：{{ post.desc }}</span>
+        </div>
+        <div>
+            <span>内容：{{ post.content }}</span>
+        </div>
+    </li>
+    <hr/>
+{% endfor %}
+</ul>
+{% if foot %}
+    <h4>{{ foot }}</h4>
+{% endif %}
+
+</body>
+</html>

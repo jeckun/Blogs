@@ -17,17 +17,23 @@ from django.contrib import admin
 from django.urls import path
 
 from django.conf.urls import url
-from blog.views import post_list, post_detail, links
+# from blog.views import post_list, post_detail, links
+from blog.views import links
+from blog.views import PostDetailView, PostListView, CategoryView, TagView
 
 # urlpatterns = [
 #     path('admin/', admin.site.urls),
 # ]
 
 urlpatterns = [
-    url(r'^$', post_list, name='index'),
-    url(r'^category/(?P<category_id>\d+)/$', post_list, name='category-list'),
-    url(r'^tag/(?P<tag_id>\d+)/$', post_list, name='tag-list'),
-    url(r'^post/(?P<post_id>\d+).html$', post_detail, name='post-detail'),
+    # url(r'^$', post_list, name='index'),
+    url(r'^$', PostListView.as_view(), name='index'),
+    # url(r'^category/(?P<category_id>\d+)/$', post_list, name='category-list'),
+    url(r'^category/(?P<category_id>\d+)/$', CategoryView.as_view(), name='category-list'),
+    # url(r'^tag/(?P<tag_id>\d+)/$', post_list, name='tag-list'),
+    url(r'^tag/(?P<tag_id>\d+)/$', TagView.as_view(), name='tag-list'),
+    # url(r'^post/(?P<post_id>\d+).html$', post_detail, name='post-detail'),
+    url(r'^post/(?P<post_id>\d+).html$', PostDetailView.as_view(), name='post-detail'),
     url(r'^links/$', links, name='links'),
     url(r'^admin/', admin.site.urls, name='admin'),
 ]
