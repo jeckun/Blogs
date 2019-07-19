@@ -7,7 +7,6 @@ from blog.models import Post
 class PostAdmin(admin.ModelAdmin):
     """ 添加后台Post管理 """
     list_display = ('title', 'desc', 'content', 'owner', 'create_time' )
-    list_editable = ('title', 'desc', )
     fields = ('title', 'desc', 'content', )
 
     def save_model(self, request, obj, form, change):
