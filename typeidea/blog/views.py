@@ -61,7 +61,7 @@ class CommonViewMixin:
 
 class PostListView(CommonViewMixin, ListView):
     queryset = Post.latest_posts()
-    paginate_by = 2
+    paginate_by = 5                     # 文章列表分页展示数量
     context_object_name = 'post_list'   # 此处定义模版中使用的变量名，如果不定义，默认是object_list
     template_name = 'blog/clslist.html'
 

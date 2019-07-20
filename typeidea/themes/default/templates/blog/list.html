@@ -2,8 +2,7 @@
 
 {% block title %}
     {% if tag %}
-    <!-- 标签页：{{ tag.name }} -->
-    标签页：{{ sidebars }}
+    标签页：{{ tag.name }}
     {% elif category %}
     分类页：{{ category.naame }}
     {% endif %}
@@ -22,14 +21,5 @@
         <p>{{ post.desc }}</p>
     </li>
     {% endfor %}
-    {% if page_obj %}
-        {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
-        {% endif %}
-        Page {{ page_obj.number }} of {{ paginator.num_pages }}.
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">下一页</a>
-        {% endif %}
-    {% endif %}
 </ul>
 {% endblock %}
