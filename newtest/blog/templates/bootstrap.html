@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+    <title>TEST</title>
+
+<!--    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">-->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap-theme.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/my.css' %}" rel="stylesheet">
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</head>
+
+<body>
+
+<div><h2>Bootstrap 练习</h2></div>
+
+<h3>Container容器效果</h3>
+<p>container容器默认会在两边留白，容器内的内容默认横排，超出宽度时，自动换行。</p>
+<div class="container">
+    <button class="btn-primary">TEST1</button>
+    <button class="btn-primary">TEST2</button>
+    <button class="btn-primary">TEST1</button>
+    <button class="btn-primary">TEST2</button>
+    <button class="btn-primary">TEST1</button>
+    <button class="btn-primary">TEST2</button>
+    <button class="btn-primary">TEST1</button>
+    <button class="btn-primary">TEST2</button>
+    <button class="btn-primary">TEST1</button>
+    <button class="btn-primary">TEST2</button>
+    <button class="btn-primary">TEST1</button>
+    <button class="btn-primary">TEST2</button>
+    <button class="btn-primary">TEST1</button>
+    <button class="btn-primary">TEST2</button>
+    <button class="btn-primary">TEST1</button>
+    <button class="btn-primary">TEST2</button>
+    <button class="btn-primary">TEST1</button>
+    <button class="btn-primary">TEST2</button>
+    <button class="btn-primary">TEST1</button>
+    <button class="btn-primary">TEST2</button>
+    <button class="btn-primary">TEST1</button>
+    <button class="btn-primary">TEST2</button>
+    <button class="btn-primary">TEST1</button>
+    <button class="btn-primary">TEST2</button>
+    <button class="btn-primary">TEST1</button>
+    <button class="btn-primary">TEST2</button>
+    <button class="btn-primary">TEST1</button>
+    <button class="btn-primary">TEST2</button>
+    <button class="btn-primary">TEST1</button>
+    <button class="btn-primary">TEST2</button>
+    <button class="btn-primary">TEST1</button>
+    <button class="btn-primary">TEST2</button>
+    <button class="btn-primary">TEST1</button>
+    <button class="btn-primary">TEST2</button>
+</div>
+
+<h3>Container-fluid容器效果</h3>
+<p>container-fluid容器更适合宽频显示，尽可能的占满屏幕</p>
+<div class="container-fluid">
+    <button class="btn-primary">TEST3</button>
+    <button class="btn-primary">TEST4</button>
+    <button class="btn-primary">TEST3</button>
+    <button class="btn-primary">TEST4</button>
+    <button class="btn-primary">TEST3</button>
+    <button class="btn-primary">TEST4</button>
+    <button class="btn-primary">TEST3</button>
+    <button class="btn-primary">TEST4</button>
+    <button class="btn-primary">TEST3</button>
+    <button class="btn-primary">TEST4</button>
+    <button class="btn-primary">TEST3</button>
+    <button class="btn-primary">TEST4</button>
+    <button class="btn-primary">TEST3</button>
+    <button class="btn-primary">TEST4</button>
+    <button class="btn-primary">TEST3</button>
+    <button class="btn-primary">TEST4</button>
+    <button class="btn-primary">TEST3</button>
+    <button class="btn-primary">TEST4</button>
+    <button class="btn-primary">TEST3</button>
+    <button class="btn-primary">TEST4</button>
+    <button class="btn-primary">TEST3</button>
+    <button class="btn-primary">TEST4</button>
+    <button class="btn-primary">TEST3</button>
+    <button class="btn-primary">TEST4</button>
+    <button class="btn-primary">TEST3</button>
+    <button class="btn-primary">TEST4</button>
+    <button class="btn-primary">TEST3</button>
+    <button class="btn-primary">TEST4</button>
+    <button class="btn-primary">TEST3</button>
+    <button class="btn-primary">TEST4</button>
+    <button class="btn-primary">TEST3</button>
+    <button class="btn-primary">TEST4</button>
+    <button class="btn-primary">TEST3</button>
+    <button class="btn-primary">TEST4</button>
+    <button class="btn-primary">TEST3</button>
+    <button class="btn-primary">TEST4</button>
+    <button class="btn-primary">TEST3</button>
+    <button class="btn-primary">TEST4</button>
+</div>
+
+<h2>栅格系统</h2>
+<p>规则如下：</p>
+<ul>
+    <li>bootstrap的栅格系统，由一系列的row和column组合来实现的。</li>
+    <li>这些column必须包括在row中，而row又必须包括在一个container容器中。</li>
+    <li>bootstrap会将一行划分最大不超过12列。</li>
+    <li>可以使用类似".row"或".col-xs-4"这样的类来定义一个元素所占列数，以及适用于那一类屏幕。</li>
+    <li>通过给列".col"设置padding属性，可以定义每个元素之间的间隔。</li>
+    <li>通过为 .row 元素设置负值 margin 从而抵消掉为 .container 元素设置的 padding，也就间接为“行（row）”所包含的“列（column）”抵消掉了padding。</li>
+    <li>如果一“行（row）”中包含了的“列（column）”大于 12，多余的“列（column）”所在的元素将被作为一个整体另起一行排列。</li>
+</ul>
+<p>实例如下：（流式布局）</p>
+<div class="container">
+    <div class="row">
+      <div class="col-md-1"><p class="bg-info">.col-md-1</p></div>
+      <div class="col-md-1"><p class="bg-success">.col-md-1</p></div>
+      <div class="col-md-1"><p class="bg-info">.col-md-1</p></div>
+      <div class="col-md-1"><p class="bg-success">.col-md-1</p></div>
+      <div class="col-md-1"><p class="bg-info">.col-md-1</p></div>
+      <div class="col-md-1"><p class="bg-success">.col-md-1</p></div>
+      <div class="col-md-1"><p class="bg-info">.col-md-1</p></div>
+      <div class="col-md-1"><p class="bg-success">.col-md-1</p></div>
+      <div class="col-md-1"><p class="bg-info">.col-md-1</p></div>
+      <div class="col-md-1"><p class="bg-success">.col-md-1</p></div>
+      <div class="col-md-1"><p class="bg-info">.col-md-1</p></div>
+      <div class="col-md-1"><p class="bg-success">.col-md-1</p></div>
+    </div>
+    <div class="row">
+      <div class="col-md-8"><p class="bg-info">.col-md-8</p></div>
+      <div class="col-md-4"><p class="bg-success">.col-md-4</p></div>
+    </div>
+    <div class="row">
+      <div class="col-md-4"><p class="bg-success">.col-md-4</p></div>
+      <div class="col-md-4"><p class="bg-success">.col-md-4</p></div>
+      <div class="col-md-4"><p class="bg-success">.col-md-4</p></div>
+    </div>
+    <div class="row">
+      <div class="col-md-6"><p class="bg-primary">.col-md-6</p></div>
+      <div class="col-md-6"><p class="bg-primary">.col-md-6</p></div>
+    </div>
+    <div class="row">
+      <div class="col-md-3"><p class="bg-warning">.col-md-3</p></div>
+      <div class="col-md-3"><p class="bg-warning">.col-md-3</p></div>
+    </div>
+    <div class="row">
+      <div class="col-md-7"><p class="bg-danger">.col-md-7</p></div>
+      <div class="col-md-3"><p class="bg-danger">.col-md-3</p></div>
+    </div>
+</div>
+
+<p>可以看出，每个栅格系统之间都有固定间隙。并且每个元素定义的宽度为定义的跨列数量，不会因为一行不足12列而自行调整。
+    并且当切换到小屏时会一行显示一个元素。</p>
+
+
+<p>实例如下：（同时定义移动设备和桌面屏幕）</p>
+<div class="container">
+    <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+    <div class="row">
+        <div class="col-xs-12 col-md-8"><p class="bg-warning">.col-xs-12 .col-md-8</p></div>
+        <div class="col-xs-6 col-md-4"><p class="bg-warning">.col-xs-6 .col-md-4</p></div>
+    </div>
+
+    <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+    <div class="row">
+        <div class="col-xs-6 col-md-4"><p class="bg-primary">.col-xs-6 .col-md-4</p></div>
+        <div class="col-xs-6 col-md-4"><p class="bg-primary">.col-xs-6 .col-md-4</p></div>
+        <div class="col-xs-6 col-md-4"><p class="bg-primary">.col-xs-6 .col-md-4</p></div>
+    </div>
+
+    <!-- Columns are always 50% wide, on mobile and desktop -->
+    <div class="row">
+        <div class="col-xs-6"><p class="bg-danger">.col-xs-6</p></div>
+        <div class="col-xs-6"><p class="bg-danger">.col-xs-6</p></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3"><p class="bg-info">.col-xs-3</p></div>
+        <div class="col-xs-3"><p class="bg-info">.col-xs-3</p></div>
+    </div>
+</div>
+
+<p>可以看出，每个栅格系统之间都有固定间隙。并且每个元素定义的宽度会因为一行不足12列而自行调整。</p>
+
+
+<p>实例如下：（定义移动设备、平板设备、桌面屏幕）</p>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3"><p class="bg-info">.col-xs-3 col-sm-3 col-md-3</p></div>
+        <div class="col-xs-3 col-sm-3 col-md-3"><p class="bg-primary">.col-xs-3 col-sm-3 col-md-3</p></div>
+        <div class="col-xs-6 col-sm-3 col-md-6"><p class="bg-danger">.col-xs-3 col-sm-3 col-md-3</p></div>
+    </div>
+</div>
+
+<p>实例如下：（-offset-* 实现列偏移）</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"><p class="bg-info">.col-md-4</p></div>
+        <div class="col-md-4 col-md-offset-4"><p class="bg-primary">.col-md-4 .col-md-offset-4</p></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-md-offset-3"><p class="bg-info">.col-md-3 .col-md-offset-3</p></div>
+        <div class="col-md-3 col-md-offset-3"><p class="bg-primary">.col-md-3 .col-md-offset-3</p></div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3"><p class="bg-info">.col-md-6 .col-md-offset-3</p></div>
+    </div>
+</div>
+
+
+
+<h2>排版</h2>
+<ul>
+    <li>标题</li>
+    <li>字体样式--内联文本</li>
+    <li>对齐</li>
+    <li>改变大小写</li>
+    <li>地址</li>
+    <li>引用</li>
+    <li>列表</li>
+</ul>
+
+
+</body>
+</html>

@@ -16,11 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
-from blog.views import PostViews
+from blog.views import PostViews, example, bootstrap, dhr
 
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    url(r'^$', PostViews.as_view(), name='index'),
+    url(r'^$', PostViews.as_view(), name='Post'),
+    url(r'^example/', example, name='example'),
+    url(r'^bootstrap/', bootstrap, name='bootstrap'),
+    url(r'^dhr/', dhr, name='dhr'),
     url(r'^admin/', admin.site.urls, name='admin'),
 ]

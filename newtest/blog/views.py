@@ -21,3 +21,19 @@ class PostViews(Content, ListView):
     model = Post
     context_object_name = 'posts'
     template_name = 'index.html'
+
+
+def example(request, **kwargs):
+    context = {
+        'title': '洪虎的博客',
+        'navs': ['技术', '生活'],
+    }
+    return render(request, "example.html", context=context)
+
+
+def bootstrap(request, **kwargs):
+    return render(request, "bootstrap.html", context=None)
+
+
+def dhr(request, **kwargs):
+    return render(request,"dhr_index.html",context=None)
