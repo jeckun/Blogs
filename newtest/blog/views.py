@@ -35,5 +35,53 @@ def bootstrap(request, **kwargs):
     return render(request, "bootstrap.html", context=None)
 
 
-def dhr(request, **kwargs):
-    return render(request,"dhr_index.html",context=None)
+def dhr_index(request, **kwargs):
+    return render(request, "dhr_index.html", context=None)
+
+
+def dhr_org(request, **kwargs):
+    return render(request, "dhr_organization_management.html", context=None)
+
+
+def dhr_emp(request, **kwargs):
+    return render(request, "dhr_employee_center.html", context=None)
+
+
+def dhr_job_adj(request, **kwargs):
+    return render(request, "dhr_job_adjustment.html", context=None)
+
+
+def dhr_time(request, **kwargs):
+    return render(request, "dhr_time_management.html", context=None)
+
+
+def dhr_leave(request, **kwargs):
+    return render(request, "dhr_leave_management.html", context=None)
+
+
+def dhr_overtime(request, **kwargs):
+    return render(request, "dhr_overtime_management.html", context=None)
+
+
+def dhr_trip(request, **kwargs):
+    return render(request, "dhr_trip_management.html", context=None)
+
+
+def dhr_benefit(request, **kwargs):
+    return render(request, "dhr_benefit_management.html", context=None)
+
+
+def dhr_payroll(request, **kwargs):
+    return render(request, "dhr_payroll_management.html", context=None)
+
+
+def dhr_recruitment(request, **kwargs):
+    return render(request, "dhr_recruitment_management.html", context=None)
+
+
+def dhr_training(request, **kwargs):
+    return render(request, "dhr_training_management.html", context=None)
+
+
+def dhr_performance(request, **kwargs):
+    return render(request, "dhr_performance_management.html", context=None)

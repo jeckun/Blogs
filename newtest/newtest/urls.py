@@ -16,14 +16,32 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
-from blog.views import PostViews, example, bootstrap, dhr
+from blog.views import PostViews, example, bootstrap, dhr_index, dhr_org, \
+    dhr_emp, dhr_job_adj, dhr_time, dhr_leave, dhr_overtime, dhr_trip, dhr_benefit, \
+    dhr_payroll, dhr_recruitment, dhr_training, dhr_performance
 
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
+    path('dhr/', dhr_index, name='dhr'),
+    path('dhr/org/', dhr_org, name='org'),
+    path('dhr/emp/', dhr_emp, name='emp'),
+    path('dhr/job/', dhr_job_adj, name='job'),
+    path('dhr/time/', dhr_time, name='time'),
+    path('dhr/leave/', dhr_leave, name='leave'),
+    path('dhr/overtime/', dhr_overtime, name='overtime'),
+    path('dhr/trip/', dhr_trip, name='trip'),
+    path('dhr/benefit/', dhr_benefit, name='benefit'),
+    path('dhr/payroll/', dhr_payroll, name='payroll'),
+    path('dhr/recruitment/', dhr_recruitment, name='recruitment'),
+    path('dhr/training/', dhr_training, name='training'),
+    path('dhr/performance/', dhr_performance, name='performance'),
+    # url(r'^dhr/$', dhr_index, name='dhr'),
+    # url(r'^dhr/org/$', dhr_org, name='org'),
+    # url(r'^dhr/emp/', dhr_emp, name='emp'),
+    # url(r'^dhr/job/', dhr_job_adj, name='job'),
     url(r'^$', PostViews.as_view(), name='Post'),
     url(r'^example/', example, name='example'),
     url(r'^bootstrap/', bootstrap, name='bootstrap'),
-    url(r'^dhr/', dhr, name='dhr'),
     url(r'^admin/', admin.site.urls, name='admin'),
 ]
