@@ -24,6 +24,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{% static 'assets/css/dashboard.css' %}" rel="stylesheet">
+    <link href="{% static 'css/my.css' %}" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="{% static 'assets/js/ie8-responsive-file-warning.js' %}"></script><![endif]-->
@@ -101,8 +102,99 @@
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-          <h4 class="page-header">薪酬管理</h4>
+          <h4 class="page-header">
+            <ol class="breadcrumb nav-my">
+              <li><a href="{% url 'dhr' %}">工作台</a></li>
+              <li class="active">薪酬管理</li>
+            </ol>
+          </h4>
 
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">薪资档案</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">定薪调薪</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">薪资计算</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">薪资发放</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">薪资条推送</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">薪资报表</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">银行报盘</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">个税申报</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">离职结薪</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">薪资结账</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">成本拆分</a>
+            </div>
+          </div>
+
+          <h4 class="page-header">薪资预算</h4>
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">预算申请</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">预算调整</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">预算执行</a>
+            </div>
+          </div>
+
+          <h4 class="page-header">批量处理</h4>
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">导入薪资档案</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">导入代发银行</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">导入薪资数据</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">导入专项附加扣除</a>
+            </div>
+          </div>
+
+          <h4 class="page-header">基础设置</h4>
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">薪资期间</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">薪资项目</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">薪资标准</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">薪资规则</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">薪资函数</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <a class="btn btn-default btn_menu"  href="#" role="button">薪资组设置</a>
+            </div>
+          </div>
 
         </div>
       </div>
