@@ -35,6 +35,15 @@ def bootstrap(request, **kwargs):
     return render(request, "bootstrap.html", context=None)
 
 
+def bootstrap_table(request, **kwargs):
+    return render(request, "bootstrap_table.html", context=None)
+
+
+def get_json(request, **kwargs):
+
+    return
+
+
 def dhr_index(request, **kwargs):
     return render(request, "dhr_index.html", context=None)
 

@@ -94,7 +94,7 @@ body {
  */
 
 .placeholders {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   text-align: center;
 }
 .placeholders h4 {
@@ -105,5 +105,5 @@ body {
 }
 .placeholder img {
   display: inline-block;
-  border-radius: 50%;
+  border-radius: 30%;
 }

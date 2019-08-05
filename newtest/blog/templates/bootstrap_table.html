@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        {% load staticfiles %}
+        <meta charset="UTF-8" />
+        <title>Dashboard | Nadhif - Responsive Admin Template</title>
+<!--        <link rel="stylesheet" href="../../../css/bootstrap.min.css">-->
+<!--        <link rel="stylesheet" href="../../../public/css/plugins/bootstrap-table/bootstrap-table.min.css">-->
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap-table.min.css' %}" rel="stylesheet">
+<!--        <script src="../../../js/jquery.min.js"></script>-->
+<!--        <script src="../../../js/bootstrap.min.js"></script>-->
+<!--        <script src="../../../public/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>-->
+<!--        <script src="../../../public/js/plugins/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>-->
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap-table.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap-table-zh-CN.min.js' %}"></script>
+    </head>
+
+    <body>
+        <table id="mytab" class="table table-hover"></table>
+        <script>
+            $('#mytab').bootstrapTable({
+                url: 'data.json',
+                method: 'post',
+                queryParams: "queryParams",
+                toolbar: "#toolbar",
+                sidePagination: "true",
+                striped: true, // 是否显示行间隔色
+                //search : "true",
+                uniqueId: "ID",
+                pageSize: "5",
+                pagination: true, // 是否分页
+                sortable: true, // 是否启用排序
+                columns: [{
+                        field: 'id',
+                        title: '登录名'
+                    },
+                    {
+                        field: 'name',
+                        title: '昵称'
+                    },
+                    {
+                        field: 'price',
+                        title: '角色'
+                    },
+                    {
+                        field: 'price',
+                        title: '操作',
+                        width: 120,
+                        align: 'center',
+                        valign: 'middle',
+                        formatter: actionFormatter,
+                    },
+
+                ]
+            });
+            //操作栏的格式化
+            function actionFormatter(value, row, index) {
+                var id = value;
+                var result = "";
+                result += "<a href='javascript:;' class='btn btn-xs green' onclick=\"EditViewById('" + id + "', view='view')\" title='查看'><span class='glyphicon glyphicon-search'></span></a>";
+                result += "<a href='javascript:;' class='btn btn-xs blue' onclick=\"EditViewById('" + id + "')\" title='编辑'><span class='glyphicon glyphicon-pencil'></span></a>";
+                result += "<a href='javascript:;' class='btn btn-xs red' onclick=\"DeleteByIds('" + id + "')\" title='删除'><span class='glyphicon glyphicon-remove'></span></a>";
+                return result;
+            }
+        </script>
+    </body>
+
+</html>
