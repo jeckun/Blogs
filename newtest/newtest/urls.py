@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
-from blog.views import PostViews, example, bootstrap, bootstrap_table, get_json, dhr_index, dhr_org, \
+from blog.views import PostViews, example, bootstrap, bootstrap_table, get_json, dhr_index, dhr_org, dhr_dept,\
     dhr_emp, dhr_job_adj, dhr_time, dhr_leave, dhr_overtime, dhr_trip, dhr_benefit, \
     dhr_payroll, dhr_recruitment, dhr_training, dhr_performance
 
@@ -25,6 +25,7 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path('dhr/', dhr_index, name='dhr'),
     path('dhr/org/', dhr_org, name='org'),
+    path('dhr/dept/', dhr_dept, name='dept'),
     path('dhr/emp/', dhr_emp, name='emp'),
     path('dhr/job/', dhr_job_adj, name='job'),
     path('dhr/time/', dhr_time, name='time'),

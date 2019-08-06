@@ -3,7 +3,7 @@
 <head>
     {% load staticfiles %}
 
-    <title>DHR 工作桌面</title>
+    <title>DHR 部门管理</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,6 +24,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{% static 'assets/css/dashboard.css' %}" rel="stylesheet">
+    <link href="{% static 'css/my.css' %}" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="{% static 'assets/js/ie8-responsive-file-warning.js' %}"></script><![endif]-->
@@ -75,122 +76,136 @@
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
+        <li class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="{% url 'dhr' %}">工作桌面<span class="sr-only">(current)</span></a></li>
             <li><a href="{% url 'org' %}">组织管理</a></li>
-            <li><a href="{% url 'emp' %}">员工管理</a></li>
-            <li><a href="{% url 'job' %}">异动管理</a></li>
+            <li class="active"><a href="{% url 'org' %}">部门管理<span class="sr-only">(current)</span></a></li>
+            <li><a href="{% url 'emp' %}">岗位管理</a></li>
+            <li><a href="{% url 'job' %}">职务管理</a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="{% url 'time' %}">考勤管理</a></li>
-            <li><a href="{% url 'leave' %}">休假管理</a></li>
-            <li><a href="{% url 'overtime' %}">加班管理</a></li>
-            <li><a href="{% url 'trip' %}">出差管理</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="{% url 'benefit' %}">社保福利</a></li>
-            <li><a href="{% url 'payroll' %}">薪酬管理</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="{% url 'recruitment' %}">招聘管理</a></li>
-            <li><a href="{% url 'training' %}">培训管理</a></li>
-            <li><a href="{% url 'performance' %}">绩效管理</a></li>
+            <li><a href="#">编制管理</a></li>
+            <li><a href="#">汇报关系</a></li>
+            <li><a href="#">继任者管理</a></li>
           </ul>
         </div>
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-          <h4 class="page-header">概览：宏达科技集团 2019年7月</span> </h4>
-          <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>总人数</h4>
-              <span class="text-muted">截止今天最新人数</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>人员结构</h4>
-              <span class="text-muted">最新人员结构</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>入离职数</h4>
-              <span class="text-muted">本月入职离职人数</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>薪资发放进度</h4>
-              <span class="text-muted">截止上月薪资发放进度</span>
-            </div>
-          </div>
+        <h4 class="page-header">
+          <ol class="breadcrumb nav-my">
+            <li><a href="{% url 'dhr' %}">工作台</a></li>
+            <li><a href="{% url 'org' %}">组织管理</a></li>
+            <li class="active">部门管理</li>
+          </ol>
+        </h4>
 
-<!--      <h4 class="sub-header">任务：最新（10）/ 已办（120）/ 过期（3）/ 转出（2）</h4>   -->
-          <h4 class="sub-header">
-            任务：
-            <a class="btn-menu" href="#">最新<span class="badge">43</span></a> /
-            <a class="btn-menu" href="#">已办<span class="badge">120</span></a> /
-            <a class="btn-menu" href="#">办结<span class="badge">215</span></a>
-          </h4>
-          <div class="table-responsive">
+        <div class="nav">
+          <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-primary">
+                <input type="radio" name="options" id="option1"> 新增
+              </label>
+              <label class="btn btn-default">
+                <input type="radio" name="options" id="option2"> 修改
+              </label>
+              <label class="btn btn-default">
+                <input type="radio" name="options" id="option3"> 复制
+              </label>
+              <label class="btn btn-default">
+                <input type="radio" name="options" id="option5"> 撤销
+              </label>
+              <label class="btn btn-default">
+                <input type="radio" name="options" id="option6"> 打印
+              </label>
+              <label class="btn btn-default">
+                <input type="radio" name="options" id="option6"> 导入
+              </label>
+              <label class="btn btn-default">
+                <input type="radio" name="options" id="option6"> 导出
+              </label>
+              <label class="btn btn-default">
+                <input type="radio" name="options" id="option6"> 组织机构图
+              </label>
+          </div>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control mr-sm-2" placeholder="部门名称...">
+            <button class="btn btn-outline-success btn-primary" type="submit">查询</button>
+          </form>
+        </div>
+
+        <div class="table-condensed table-bordered">
             <table class="table table-striped">
               <thead>
                 <tr>
                   <th>序号</th>
-                  <th>发起日期</th>
-                  <th>发起人</th>
-                  <th>代办事项</th>
-                  <th>状态</th>
-                  <th>到期时间</th>
+                  <th>组织编码</th>
+                  <th>组织名称</th>
+                  <th>上级组织</th>
+                  <th>类型</th>
+                  <th>负责人</th>
+                  <th>编制</th>
+                  <th>更新时间</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>121</td>
-                  <td>2019-7-1</td>
-                  <td>Lorem</td>
-                  <td>市场部 张学美的入职申请</td>
-                  <td>审批中</td>
+                  <td>1</td>
+                  <td>01</td>
+                  <td><a href="{% url 'org' %}">欣富盛集团</a></td>
+                  <td></td>
+                  <td>集团</td>
+                  <td></td>
+                  <td></td>
                   <td>2019-7-30</td>
                 </tr>
                 <tr>
-                  <td>122</td>
-                  <td>2019-6-15</td>
-                  <td>Franck</td>
-                  <td>研发部 彭凯的调岗申请</td>
-                  <td>审批中</td>
+                  <td>2</td>
+                  <td>0101</td>
+                  <td>长生养老房地产公司</td>
+                  <td>欣富盛集团</td>
+                  <td>公司</td>
+                  <td>张旭</td>
+                  <td>300</td>
                   <td>2019-7-30</td>
                 </tr>
                 <tr>
-                  <td>123</td>
-                  <td>2019-7-4</td>
-                  <td>Jecyka</td>
-                  <td>销售部 王楠的离职申请</td>
-                  <td>审批中</td>
+                  <td>3</td>
+                  <td>010101</td>
+                  <td>总经办</td>
+                  <td>长生养老房地产公司</td>
+                  <td>部门</td>
+                  <td>张旭</td>
+                  <td>5</td>
                   <td>2019-7-30</td>
                 </tr>
                 <tr>
-                  <td>124</td>
-                  <td>2019-7-24</td>
-                  <td>Mack</td>
-                  <td>研发部 催晓婧的调薪申请</td>
-                  <td>审批中</td>
+                  <td>4</td>
+                  <td>010102</td>
+                  <td>财务中心</td>
+                  <td>长生养老房地产公司</td>
+                  <td>部门</td>
+                  <td>徐璐露</td>
+                  <td>5</td>
                   <td>2019-7-30</td>
                 </tr>
                 <tr>
-                  <td>125</td>
-                  <td>2019-7-17</td>
-                  <td>Jecyka</td>
-                  <td>市场部 马明宇的休假申请</td>
-                  <td>审批中</td>
+                  <td>5</td>
+                  <td>010103</td>
+                  <td>行政服务中心</td>
+                  <td>长生养老房地产公司</td>
+                  <td>部门</td>
+                  <td>江峰</td>
+                  <td>15</td>
                   <td>2019-7-30</td>
                 </tr>
                 <tr>
-                  <td>126</td>
-                  <td>2019-7-23</td>
-                  <td>Jecyka</td>
-                  <td>运维部 张章的调休申请</td>
-                  <td>审批中</td>
+                  <td>6</td>
+                  <td>010104</td>
+                  <td>人力资源中心</td>
+                  <td>长生养老房地产公司</td>
+                  <td>部门</td>
+                  <td>王曼丽</td>
+                  <td>20</td>
                   <td>2019-7-30</td>
                 </tr>
               </tbody>
@@ -207,7 +222,7 @@
             </nav>
 
           </div>
-        </div>
+
       </div>
     </div>
 

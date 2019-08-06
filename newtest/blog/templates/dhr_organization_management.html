@@ -76,7 +76,7 @@
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
+        <li class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li><a href="{% url 'dhr' %}">工作桌面</a></li>
             <li class="active"><a href="{% url 'org' %}">组织管理<span class="sr-only">(current)</span></a></li>
@@ -114,7 +114,7 @@
             <a class="btn btn-default btn_menu"  href="#" role="button">组织机构图</a>
           </div>
           <div class="col-xs-6 col-sm-3 placeholder">
-            <a class="btn btn-default btn_menu"  href="#" role="button">部门维护</a>
+            <a class="btn btn-default btn_menu"  href="{% url 'dept' %}" role="button">部门维护</a>
           </div>
           <div class="col-xs-6 col-sm-3 placeholder">
             <a class="btn btn-default btn_menu"  href="#" role="button">岗位维护</a>
