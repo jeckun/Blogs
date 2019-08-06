@@ -15,3 +15,7 @@
     background-color: white;
     margin: 0px;
 }
+
+.my-btn {
+    float: right!important
+}

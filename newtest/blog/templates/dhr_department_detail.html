@@ -3,7 +3,7 @@
 <head>
     {% load staticfiles %}
 
-    <title>DHR 部门管理</title>
+    <title>DHR 部门明细</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -96,134 +96,102 @@
           <ol class="breadcrumb nav-my">
             <li><a href="{% url 'dhr' %}">工作台</a></li>
             <li><a href="{% url 'org' %}">组织管理</a></li>
-            <li class="active">部门管理</li>
+            <li><a href="{% url 'dept' %}">组织管理</a></li>
+            <li class="active">部门信息</li>
           </ol>
         </h4>
 
-        <div class="nav">
-          <div class="btn-group" data-toggle="buttons">
-              <label class="btn btn-primary">
-                  <input type="radio" name="options" id="option1"> 新增
-              </label>
-              <label class="btn btn-default">
-                <input type="radio" name="options" id="option2"> 修改
-              </label>
-              <label class="btn btn-default">
-                <input type="radio" name="options" id="option3"> 复制
-              </label>
-              <label class="btn btn-default">
-                <input type="radio" name="options" id="option5"> 撤销
-              </label>
-              <label class="btn btn-default">
-                <input type="radio" name="options" id="option6"> 打印
-              </label>
-              <label class="btn btn-default">
-                <input type="radio" name="options" id="option6"> 导入
-              </label>
-              <label class="btn btn-default">
-                <input type="radio" name="options" id="option6"> 导出
-              </label>
-              <label class="btn btn-default">
-                <input type="radio" name="options" id="option6"> 组织机构图
-              </label>
+        <div class="page-header">
+          <div class= "btn-group"  data-toggle="buttons">
+            <label class="btn btn-default">
+                <input type="radio" name="options" id="option1"> 修改
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="options" id="option2"> 保存
+            </label>
+            <label class="btn btn-default">
+                <input type="radio" name="options" id="option2"> 返回
+            </label>
           </div>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control mr-sm-2" placeholder="部门名称...">
-            <button class="btn btn-outline-success btn-primary" type="submit">查询</button>
-          </form>
         </div>
 
-        <div class="table-condensed table-bordered">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>序号</th>
-                  <th>组织编码</th>
-                  <th>组织名称</th>
-                  <th>上级组织</th>
-                  <th>类型</th>
-                  <th>负责人</th>
-                  <th>编制</th>
-                  <th>更新时间</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>01</td>
-                  <td><a href="{% url 'dept_detail' %}">欣富盛集团</a></td>
-                  <td></td>
-                  <td>集团</td>
-                  <td></td>
-                  <td></td>
-                  <td>2019-7-30</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>0101</td>
-                  <td>长生养老房地产公司</td>
-                  <td>欣富盛集团</td>
-                  <td>公司</td>
-                  <td>张旭</td>
-                  <td>300</td>
-                  <td>2019-7-30</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>010101</td>
-                  <td>总经办</td>
-                  <td>长生养老房地产公司</td>
-                  <td>部门</td>
-                  <td>张旭</td>
-                  <td>5</td>
-                  <td>2019-7-30</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>010102</td>
-                  <td>财务中心</td>
-                  <td>长生养老房地产公司</td>
-                  <td>部门</td>
-                  <td>徐璐露</td>
-                  <td>5</td>
-                  <td>2019-7-30</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>010103</td>
-                  <td>行政服务中心</td>
-                  <td>长生养老房地产公司</td>
-                  <td>部门</td>
-                  <td>江峰</td>
-                  <td>15</td>
-                  <td>2019-7-30</td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>010104</td>
-                  <td>人力资源中心</td>
-                  <td>长生养老房地产公司</td>
-                  <td>部门</td>
-                  <td>王曼丽</td>
-                  <td>20</td>
-                  <td>2019-7-30</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <nav aria-label="...">
-              <ul class="pagination navbar-right">
-                <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
-              </ul>
-            </nav>
+        <div class="panel panel-default ">
+          <div class="panel-heading">
+              <h4>部门信息</h4>
+          </div>
+          <div class="panel-body">
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">部门编码</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                </div>
+                <label for="inputEmail3" class="col-sm-2 control-label">部门名称</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control " id="inputEmail3" placeholder="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">上级部门</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                </div>
+                <label for="inputEmail3" class="col-sm-2 control-label">成本中心</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">部门类型</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                </div>
+                <label for="inputEmail3" class="col-sm-2 control-label">部门路径</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">主要领导</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                </div>
+                <label for="inputEmail3" class="col-sm-2 control-label">部门副职</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">编制人数</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                </div>
+                <label for="inputEmail3" class="col-sm-2 control-label">现有人数</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">HRBP</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">创建人</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                </div>
+                <label for="inputEmail3" class="col-sm-2 control-label">修改时间</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                </div>
+              </div>
+            </form>
 
           </div>
+        </div>
 
-      </div>
     </div>
 
     <!-- Bootstrap core JavaScript

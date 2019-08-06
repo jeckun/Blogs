@@ -56,6 +56,10 @@ def dhr_dept(request, **kwargs):
     return render(request, "dhr_department_management.html", context=None)
 
 
+def dhr_dept_detail(request, **kwargs):
+    return render(request, "dhr_department_detail.html", context=None)
+
+
 def dhr_emp(request, **kwargs):
     return render(request, "dhr_employee_center.html", context=None)
 
