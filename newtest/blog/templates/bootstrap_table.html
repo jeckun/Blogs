@@ -5,68 +5,102 @@
         {% load staticfiles %}
         <meta charset="UTF-8" />
         <title>Dashboard | Nadhif - Responsive Admin Template</title>
-<!--        <link rel="stylesheet" href="../../../css/bootstrap.min.css">-->
-<!--        <link rel="stylesheet" href="../../../public/css/plugins/bootstrap-table/bootstrap-table.min.css">-->
+
         <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
         <link href="{% static 'css/bootstrap-table.min.css' %}" rel="stylesheet">
-<!--        <script src="../../../js/jquery.min.js"></script>-->
-<!--        <script src="../../../js/bootstrap.min.js"></script>-->
-<!--        <script src="../../../public/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>-->
-<!--        <script src="../../../public/js/plugins/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>-->
         <script src="{% static 'js/jquery.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
         <script src="{% static 'js/bootstrap-table.min.js' %}"></script>
         <script src="{% static 'js/bootstrap-table-zh-CN.min.js' %}"></script>
     </head>
-
     <body>
-        <table id="mytab" class="table table-hover"></table>
-        <script>
-            $('#mytab').bootstrapTable({
-                url: 'data.json',
-                method: 'post',
-                queryParams: "queryParams",
-                toolbar: "#toolbar",
-                sidePagination: "true",
-                striped: true, // 是否显示行间隔色
-                //search : "true",
-                uniqueId: "ID",
-                pageSize: "5",
-                pagination: true, // 是否分页
-                sortable: true, // 是否启用排序
-                columns: [{
-                        field: 'id',
-                        title: '登录名'
-                    },
-                    {
-                        field: 'name',
-                        title: '昵称'
-                    },
-                    {
-                        field: 'price',
-                        title: '角色'
-                    },
-                    {
-                        field: 'price',
-                        title: '操作',
-                        width: 120,
-                        align: 'center',
-                        valign: 'middle',
-                        formatter: actionFormatter,
-                    },
+<h1>数据加载方案1：通过URL调用Json数据</h1>
+<table id="table1"
+       data-toggle="table"
+       data-url="{% url 'data.json' %}"
+       >
+  <thead>
+    <tr>
+      <th data-field="id">ID</th>
+      <th data-field="name">Item Name</th>
+      <th data-field="price">Item Price</th>
+    </tr>
+  </thead>
+</table>
 
-                ]
-            });
-            //操作栏的格式化
-            function actionFormatter(value, row, index) {
-                var id = value;
-                var result = "";
-                result += "<a href='javascript:;' class='btn btn-xs green' onclick=\"EditViewById('" + id + "', view='view')\" title='查看'><span class='glyphicon glyphicon-search'></span></a>";
-                result += "<a href='javascript:;' class='btn btn-xs blue' onclick=\"EditViewById('" + id + "')\" title='编辑'><span class='glyphicon glyphicon-pencil'></span></a>";
-                result += "<a href='javascript:;' class='btn btn-xs red' onclick=\"DeleteByIds('" + id + "')\" title='删除'><span class='glyphicon glyphicon-remove'></span></a>";
-                return result;
-            }
-        </script>
+<h1>数据加载方案2：通过数据属性</h1>
+<table id="table2"
+       data-toggle="table">
+  <thead>
+    <tr>
+      <th data-field="id">ID</th>
+      <th data-field="name">Item Name</th>
+      <th data-field="price">Item Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Item 1</td>
+      <td>$1</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Item 2</td>
+      <td>$2</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1>数据加载方案3：通过JavaScript</h1>
+<table id="table3"
+       data-toggle="table">
+  <thead>
+    <tr>
+      <th data-field="id">ID</th>
+      <th data-field="name">Item Name</th>
+      <th data-field="price">Item Price</th>
+    </tr>
+  </thead>
+
+    <script>
+      var $table = $('#table')
+      $(function() {
+        var data = [
+          {
+            'id': 0,
+            'name': 'Item 0',
+            'price': '$0'
+          },
+          {
+            'id': 1,
+            'name': 'Item 1',
+            'price': '$1'
+          },
+          {
+            'id': 2,
+            'name': 'Item 2',
+            'price': '$2'
+          },
+          {
+            'id': 3,
+            'name': 'Item 3',
+            'price': '$3'
+          },
+          {
+            'id': 4,
+            'name': 'Item 4',
+            'price': '$4'
+          },
+          {
+            'id': 5,
+            'name': 'Item 5',
+            'price': '$5'
+          }
+        ]
+        $table.bootstrapTable({data: data})
+      })
+    </script>
     </body>
 
 </html>

@@ -45,6 +45,6 @@ urlpatterns = [
     url(r'^example/', example, name='example'),
     url(r'^bootstrap/', bootstrap, name='bootstrap'),
     url(r'^bootstrap_table/', bootstrap_table, name='bootstrap_table'),
-    url(r'^data.json', get_json, name='data.json'),
     url(r'^admin/', admin.site.urls, name='admin'),
+    url(r'^json/data.json', get_json, name='data.json'),
 ]

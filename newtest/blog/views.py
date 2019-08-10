@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.views import View
+# from django.http.response import JsonResponsefrom
+import json
+from django.http.response import HttpResponse
 from django.views.generic import DetailView, ListView
 from blog.models  import Post
 
@@ -40,8 +43,24 @@ def bootstrap_table(request, **kwargs):
 
 
 def get_json(request, **kwargs):
-
-    return
+    data = [
+      {
+        'id': 0,
+        'name': 'Item 0',
+        'price': '$0'
+      },
+      {
+        'id': 1,
+        'name': 'Item 2',
+        'price': '$15'
+      },
+      {
+        'id': 2,
+        'name': 'Item 3',
+        'price': '$25'
+      }
+    ]
+    return HttpResponse(json.dumps(data))
 
 
 def dhr_index(request, **kwargs):
