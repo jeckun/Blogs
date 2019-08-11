@@ -14,11 +14,26 @@
         <script src="{% static 'js/bootstrap-table-zh-CN.min.js' %}"></script>
     </head>
     <body>
-<h1>数据加载方案1：通过URL调用Json数据</h1>
-<table id="table1"
-       data-toggle="table"
-       data-url="{% url 'data.json' %}"
-       >
+
+<h3>数据加载方案1：通过URL调用Json数据</h3>
+<div class="table-condensed table-bordered">
+<table id="table1" class="table table-striped"
+  id="table"
+  data-toolbar="#toolbar"
+  data-show-refresh="true"
+  data-show-toggle="true"
+  data-show-fullscreen="true"
+  data-show-columns="true"
+  data-show-export="true"
+  data-click-to-select="true"
+  data-pagination="true"
+  data-id-field="id"
+  data-page-list="[10, 25, 50, 100, all]"
+  data-show-footer="true"
+  data-side-pagination="server"
+  data-search="true"
+  data-toggle="table"
+  data-url="{% url 'data.json' %}">
   <thead>
     <tr>
       <th data-field="id">ID</th>
@@ -27,8 +42,9 @@
     </tr>
   </thead>
 </table>
+</div>
 
-<h1>数据加载方案2：通过数据属性</h1>
+<h3>数据加载方案2：通过数据属性</h3>
 <table id="table2"
        data-toggle="table">
   <thead>
@@ -52,9 +68,8 @@
   </tbody>
 </table>
 
-<h1>数据加载方案3：通过JavaScript</h1>
-<table id="table3"
-       data-toggle="table">
+<h3>数据加载方案3：通过JavaScript加载数据属性</h3>
+<table id="table"></table>
   <thead>
     <tr>
       <th data-field="id">ID</th>
@@ -63,44 +78,114 @@
     </tr>
   </thead>
 
-    <script>
-      var $table = $('#table')
-      $(function() {
-        var data = [
-          {
-            'id': 0,
-            'name': 'Item 0',
-            'price': '$0'
-          },
-          {
-            'id': 1,
-            'name': 'Item 1',
-            'price': '$1'
-          },
-          {
-            'id': 2,
-            'name': 'Item 2',
-            'price': '$2'
-          },
-          {
-            'id': 3,
-            'name': 'Item 3',
-            'price': '$3'
-          },
-          {
-            'id': 4,
-            'name': 'Item 4',
-            'price': '$4'
-          },
-          {
-            'id': 5,
-            'name': 'Item 5',
-            'price': '$5'
-          }
-        ]
-        $table.bootstrapTable({data: data})
-      })
-    </script>
-    </body>
+  <script>
+  $('#table').bootstrapTable({
+  columns: [{
+    field: 'id',
+    title: 'Item ID'
+  }, {
+    field: 'name',
+    title: 'Item Name'
+  }, {
+    field: 'price',
+    title: 'Item Price'
+  }],
+  data: [{
+    id: 1,
+    name: 'Item EX3 1',
+    price: '$1'
+  }, {
+    id: 2,
+    name: 'Item EX3 2',
+    price: '$2'
+  }]
+})
+  </script>
+
+
+<h3>数据加载方案4：通过JavaScript加载URL指向的Json数据</h3>
+<table id="table4"></table>
+  <thead>
+    <tr>
+      <th data-field="id">ID</th>
+      <th data-field="name">Item Name</th>
+      <th data-field="price">Item Price</th>
+    </tr>
+  </thead>
+<script>
+$('#table4').bootstrapTable({
+  url: '{% url 'data.json' %}',
+  dataType: "json",
+  pagination: true,                   //是否显示分页（*）
+  sortable: true,                     //是否启用排序
+  pageNumber: 1,                       //初始化加载第一页，默认第一页
+  pageSize: 5,                       //每页的记录行数（*）
+  pageList: [5, 10, 15, 20],        //可供选择的每页的行数（*）
+  search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+  striped: true,                      //是否显示行间隔色
+  sortOrder: "asc",                   //排序方式
+  method: 'get',                      //请求方式（*）
+  toolbar: '#toolbar',                //工具按钮用哪个容器
+  cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+  showRefresh: true,                  //是否显示刷新按钮
+  clickToSelect: true,                //是否启用点击选中行
+  uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+  showToggle: false,                  //是否显示详细视图和列表视图的切换按钮
+  cardView: false,                    //是否显示详细视图
+  detailView: false,                  //是否显示父子表
+  showColumns: true,                  //是否显示所有的列
+  minimumCountColumns: 2,             //最少允许的列数
+  strictSearch: true,
+
+
+<!--  { #queryParams: oTableInit.queryParams,    //传递参数（*）#  }-->
+<!--  sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）#-->
+<!--  {#height: 500,                      //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度#  }-->
+
+
+  columns: [{
+    field: 'id',
+    title: 'Item ID'
+  }, {
+    field: 'name',
+    title: 'Item Name'
+  }, {
+    field: 'price',
+    title: 'Item Price'
+  }]
+})
+</script>
+
+<h3>数据加载方案5：通过JavaScript加载Json文件</h3>
+<div class="table-condensed table-bordered">
+<table id="table5" ></table>
+  <thead>
+    <tr>
+      <th data-field="id">ID</th>
+      <th data-field="name">Item Name</th>
+      <th data-field="price">Item Price</th>
+    </tr>
+  </thead>
+
+  <script>
+  $('#table5').bootstrapTable({
+  url: '{% static 'json/data.json' %}',
+  dataType: "json",
+  pagination: true,                   //是否显示分页（*）
+  sortable: true,                     //是否启用排序
+  columns: [{
+    field: 'id',
+    title: 'Item ID'
+  }, {
+    field: 'name',
+    title: 'Item Name'
+  }, {
+    field: 'price',
+    title: 'Item Price'
+  }]
+})
+  </script>
+</div>
+  </body>
 
 </html>
