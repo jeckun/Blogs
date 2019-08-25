@@ -4,6 +4,7 @@ from .models import Post, Tag, Category, Link, SideBar
 from django.views import View
 from django.views.generic import DetailView, ListView
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 
 # def post_list(request, category_id=None, tag_id=None):
@@ -57,6 +58,23 @@ class CommonViewMixin:
         })
         context.update(Category.get_navs())
         return context
+
+
+# 查询视图实现
+class SearchView(ListView):
+    def get_context_data(self):
+        context = super().get_context_data()
+        context.update(
+            {'keyword': self.request.GET.get('keyword', '')}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        keyword = self.request.GET.get('keyword')
+        if not keyword:
+            return queryset
+        return queryset.filter(Q(title__icontains=keyword) | Q(desc__icontains=keyword))
 
 
 class PostListView(CommonViewMixin, ListView):
