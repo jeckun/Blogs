@@ -60,23 +60,6 @@ class CommonViewMixin:
         return context
 
 
-# 查询视图实现
-class SearchView(ListView):
-    def get_context_data(self):
-        context = super().get_context_data()
-        context.update(
-            {'keyword': self.request.GET.get('keyword', '')}
-        )
-        return context
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        keyword = self.request.GET.get('keyword')
-        if not keyword:
-            return queryset
-        return queryset.filter(Q(title__icontains=keyword) | Q(desc__icontains=keyword))
-
-
 class PostListView(CommonViewMixin, ListView):
     queryset = Post.latest_posts()
     paginate_by = 5                     # 文章列表分页展示数量
@@ -116,6 +99,32 @@ class TagView(PostListView):
         queryset = super().get_queryset()
         tag_id = self.kwargs.get('tag_id')
         return queryset.filter(id=tag_id)
+
+
+# 查询视图实现
+class SearchView(PostListView):
+    def get_context_data(self):
+        context = super().get_context_data()
+        context.update(
+            {'keyword': self.request.GET.get('keyword', '')}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        keyword = self.request.GET.get('keyword')
+        if not keyword:
+            return queryset
+        return queryset.filter(Q(title__icontains=keyword) | Q(desc__icontains=keyword))
+
+
+# 作者视图，实现按作者过滤
+class AuthorView(PostListView):
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        author_id = self.kwargs.get('owner_id')
+        print('author:'+str(author_id))
+        return queryset.filter(owner_id=author_id)
 
 
 # def post_detail(request, post_id):

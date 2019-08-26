@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!--    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.css">-->
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
     <style>
         .post {
             margin-bottom: 3px;      // 配置每个Post卡片下面的间隔
@@ -26,9 +27,11 @@
                 </li>
                 {% endfor %}
             </ul>
-            <form class="form-inline my-2 my-1g-0" action="GET">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search"
-                       aria-label="Search">
+        </div>
+        <div>
+            <form class="form-inline my-2 my-1g-0" action="/search/" method="GET">
+                <input class="form-control mr-sm-2" type="search" name="keyword" placeholder="Search"
+                       aria-label="Search" value="{{ keyword }}">
                 <button class="btn btn-outline-success" type="submit">搜索</button>
             </form>
         </div>
