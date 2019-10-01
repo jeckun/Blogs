@@ -54,6 +54,7 @@ class CommonViewMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({
+            # 返回所有侧边栏对象
             'sidebars': SideBar.get_all(),
         })
         context.update(Category.get_navs())
@@ -61,8 +62,8 @@ class CommonViewMixin:
 
 
 class PostListView(CommonViewMixin, ListView):
-    queryset = Post.latest_posts()
-    paginate_by = 5                     # 文章列表分页展示数量
+    queryset = Post.get_all()
+    paginate_by = 8                     # 文章列表分页展示数量
     context_object_name = 'post_list'   # 此处定义模版中使用的变量名，如果不定义，默认是object_list
     template_name = 'blog/clslist.html'
 

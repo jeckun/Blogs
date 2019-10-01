@@ -114,9 +114,13 @@ class Post(models.Model):
         return post_list, category
 
     @classmethod
+    def get_all(cls):
+        return cls.objects.filter(status=cls.STATUS_NORMAL)
+
+    @classmethod
     def latest_posts(cls):
         queryset = cls.objects.filter(status=cls.STATUS_NORMAL)
-        return queryset
+        return queryset[:3]
 
     @classmethod
     def hot_posts(cls):
@@ -218,17 +222,21 @@ class SideBar(models.Model):
 
         result = ''
         if self.display_type == self.DISPLAY_HTML:
+            # 侧边栏类型为HTML
             result = self.content
         elif self.display_type == self.DISPLAY_LATEST:
+            # 侧边栏类型为最新文章
             context = {'posts': Post.latest_posts()}
-            result = render_to_string('blocks/sidebar_posts.html', context)
+            result = render_to_string('blocks/sidebar_posts.html', context)        # 返回最新文章列表
         elif self.display_type == self.DISPLAY_HOT:
+            # 侧边栏类型为最热文章
             context = {'posts': Post.hot_posts()}
-            result = render_to_string('blocks/sidebar_posts.html', context)
+            result = render_to_string('blocks/sidebar_posts.html', context)       # 返回最最热章列表
         elif self.display_type == self.DISPLAY_COMMENT:
+            # 侧边栏类型为最近评论
             context = {
                 'comments': Comment.objects.filter(status=Comment.STATUS_NORMAL)
             }
-            result = render_to_string('blocks/sidebar_comments.html', context)
+            result = render_to_string('blocks/sidebar_comments.html', context)       # 返回最近评论列表
 
         return result

@@ -52,6 +52,7 @@
         <!-- 侧边栏 -->
         <div class="col-3">
             {% block sidebar %}
+
                 {% for sidebar in sidebars %}
                     <div class="card sidebars">
                         <div class="card-body">
@@ -62,6 +63,15 @@
                         </div>
                     </div>
                 {% endfor %}
+
+            <div class="card sidebars">
+                <div class="card-body">
+                    <h4 class="card-title">分类</h4>
+                    {% for cate in categories %}
+                        <a class="nav-link" href="{% url 'category-list' cate.id %}">{{ cate.name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
             {% endblock %}
         </div>
     </div>
@@ -71,14 +81,6 @@
 <!-- 底部导航 -->
 <footer class="footer">
     {% block footer %}
-    <div class="nav category">
-        <hr />
-        <nav class="nav category">
-            {% for cate in categories %}
-            <a class="nav-link" href="{% url 'category-list' cate.id %}">{{ cate.name }}</a>
-            {% endfor %}
-        </nav>
-    </div>
     <div class="container power">
         <span class="text-muted">Power by Eric.kun</span>
     </div>
