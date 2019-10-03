@@ -58,7 +58,7 @@ class Category(models.Model):
                 nav_categories.append(cate)
             else:
                 normal_categories.append(cate)
-        return { 'navs': nav_categories, 'categories': normal_categories, }
+        return {'navs': nav_categories, 'categories': normal_categories, }
 
     class Meta:
         verbose_name = verbose_name_plural = '分类'
@@ -115,12 +115,19 @@ class Post(models.Model):
 
     @classmethod
     def get_all(cls):
+        # 所有帖子
         return cls.objects.filter(status=cls.STATUS_NORMAL)
 
     @classmethod
     def latest_posts(cls):
+        # 最新帖子
         queryset = cls.objects.filter(status=cls.STATUS_NORMAL)
         return queryset[:3]
+
+    @classmethod
+    def get_by_id(cls, id):
+        queryset = cls.objects.filter(pk=id)
+        return queryset
 
     @classmethod
     def hot_posts(cls):
@@ -132,6 +139,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
+    # 评论
     STATUS_NORMAL = 1
     STATUS_DELETE = 0
     STATUS_ITEMS = (
@@ -153,6 +161,11 @@ class Comment(models.Model):
 
     class Meta:
         verbose_name = verbose_name_plural = '评论'
+
+    @classmethod
+    def get_by_target(cls, target):
+        return cls.objects.filter(target=target, status=cls.STATUS_NORMAL)
+
 
 class Link(models.Model):
     # 友链
@@ -218,8 +231,7 @@ class SideBar(models.Model):
 
     @property
     def content_html(self):
-        """直接渲染模板"""
-
+        """返回HTML格式字符串"""
         result = ''
         if self.display_type == self.DISPLAY_HTML:
             # 侧边栏类型为HTML
