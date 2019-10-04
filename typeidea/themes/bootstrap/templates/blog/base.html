@@ -8,11 +8,6 @@
 <!--    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.css">-->
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" >
     <link href="{% static 'css/my.css' %}" rel="stylesheet">
-    <style>
-        .post {
-            margin-bottom: 3px;      // 配置每个Post卡片下面的间隔
-        }
-    </style>
 </head>
 <body>
 <!-- 导航 -->
@@ -26,6 +21,7 @@
                     <a class="nav-link" href="{% url 'category-list' cate.id %}">{{ cate.name }}</a>
                 </li>
                 {% endfor %}
+                {{ request.path }}
             </ul>
         </div>
         <div>

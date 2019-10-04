@@ -171,13 +171,17 @@ class Comment(models.Model):
     def __str__(self):
         return self.content
 
-    class Meta:
-        verbose_name = verbose_name_plural = '评论'
+    def save(self, *args, **kwargs):
+        # 重写保存函数，将Content转为Markdown格式保存
+        self.owner = User.objects.get(username='root')
+        return super().save(*args, **kwargs)
 
     @classmethod
     def get_by_target(cls, target):
         return cls.objects.filter(target=target, status=cls.STATUS_NORMAL)
 
+    class Meta:
+        verbose_name = verbose_name_plural = '评论'
 
 class Link(models.Model):
     # 友链

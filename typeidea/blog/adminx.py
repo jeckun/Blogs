@@ -1,10 +1,12 @@
 from django.contrib import admin
+from xadmin.layout import Row, Fieldset
 from .models import Post, Tag, Category, Link, Comment, SideBar
 
 # Register your models here.
 
 
-class BaseOwnerAdmin(admin.ModelAdmin):
+# class BaseOwnerAdmin(admin.ModelAdmin):
+class BaseOwnerAdmin(object):     # 使用xadmin，将admin.ModelAdmin改为object
     """
     1、自动补充文章、分类、标签、侧边栏、友链这些Model的owner字段
     2、用来针对get_queryset过滤当前用户的数据
@@ -65,24 +67,36 @@ class LinkAdmin(BaseOwnerAdmin):
 class PostAdmin(BaseOwnerAdmin):
     # 文章后台管理界面
     exclude = ('owner', )
-
     list_display = ('title', 'category', 'desc',  'status', 'created_time', 'owner', 'pv', 'uv')
 
     # fields = (('title', 'category', 'status'), 'desc', 'content', 'tag')
 
-    fieldsets = (
-        ('基础配置', {
-            'description': '基础配置描述',
-            'fields': (('title', 'category'), 'status',),
-        }),
-        ('内容', {
-            'fields': ('content', 'desc',),
-        }),
-        ('额外信息', {
-            'classes': ('collapse',),
-            'fields': ('tag',),
-        })
-    )
+    form_layout = {
+        Fieldset(
+            '基础信息',
+            Row("title", "category"),
+            'status',
+            'tag',
+        ),
+        Fieldset(
+            '内容信息',
+            'desc',
+            'content',
+        )
+    }
+    # fieldsets = (
+    #     ('基础配置', {
+    #         'description': '基础配置描述',
+    #         'fields': (('title', 'category'), 'status',),
+    #     }),
+    #     ('内容', {
+    #         'fields': ('content', 'desc',),
+    #     }),
+    #     ('额外信息', {
+    #         'classes': ('collapse',),
+    #         'fields': ('tag',),
+    #     })
+    # )
 
     list_filter = ('category', 'created_time')
 
