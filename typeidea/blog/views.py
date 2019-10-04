@@ -1,9 +1,13 @@
+from datetime import date
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View
 from django.views.generic import DetailView, ListView, TemplateView
 from django.shortcuts import get_object_or_404
-from django.db.models import Q
+from django.db.models import Q, F
+from django.core.cache import cache
+
 from .models import Post, Tag, Category, Link, SideBar, Comment
 from .forms import CommentForm
 
@@ -39,6 +43,35 @@ class PostDetailView(CommonViewMixin, DetailView):
     template_name = 'blog/clsDetail.html'
     context_object_name = 'post'
     pk_url_kwarg = 'post_id'    # 如果不定义这个，默认变量为pk
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        self.handle_visited()
+        return response
+
+    def handle_visited(self):
+        # 用来记录页面访问次数的
+        increase_pv = False
+        increase_uv = False
+        uid = self.request.uid           # 由前端提供的用户唯一标识，这个标识在middleware.user_id中定义的
+        pv_key = 'pv:%s:%s' % (uid, self.request.path)
+        uv_key = 'uv:%s:%s:%s' % (uid, str(date.today()), self.request.path)
+
+        if not cache.get(pv_key):
+            increase_pv = True
+            cache.set(pv_key, 1, 1*60)     # 1分钟有效
+
+        if not cache.get(uv_key):
+            increase_uv = True
+            cache.set(pv_key, 1, 24*60*60)   # 24小时有效
+
+        if increase_pv and increase_uv:
+            Post.objects.filter(pk=self.object.id).update(pv=F('pv') + 1, uv=F('uv') + 1)
+        elif increase_pv:
+            Post.objects.filter(pk=self.object.id).update(pv=F('pv') + 1)
+        elif increase_uv:
+            Post.objects.filter(pk=self.object.id).update(uv=F('uv') + 1)
+
 
 
 class CommentView(TemplateView):
@@ -130,7 +163,6 @@ class AuthorView(PostListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         author_id = self.kwargs.get('owner_id')
-        print('author:'+str(author_id))
         return queryset.filter(owner_id=author_id)
 
 

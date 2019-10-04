@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.loader import render_to_string
+from django.utils.functional import cached_property
+import mistune
 
 
 class Tag(models.Model):
@@ -78,6 +80,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255, verbose_name='标题')
     desc = models.CharField(max_length=1024, blank=True, verbose_name='摘要')
     content = models.TextField(verbose_name='正文', help_text='正文必须为MarkDown格式')
+    content_html = models.TextField(verbose_name='正文HTML代码', default='', help_text='正文必须为MarkDown格式')
     status = models.PositiveIntegerField(default=STATUS_NORMAL, choices=STATUS_ITEMS, verbose_name='状态')
     category = models.ForeignKey(Category, verbose_name='分类', on_delete=models.SET_NULL, blank=True, null=True)
     tag = models.ManyToManyField(Tag, verbose_name='标签')
@@ -132,6 +135,15 @@ class Post(models.Model):
     @classmethod
     def hot_posts(cls):
         return cls.objects.filter(status=cls.STATUS_NORMAL).order_by('-pv')
+
+    def save(self, *args, **kwargs):
+        # 重写保存函数，将Content转为Markdown格式保存
+        self.content_html = mistune.markdown(self.content)
+        return super().save(*args, **kwargs)
+
+    @cached_property
+    def tags(self):
+        return ','.join(self.tag.values_list('name', flat=True))
 
     class Meta:
         verbose_name = verbose_name_plural = '文章'

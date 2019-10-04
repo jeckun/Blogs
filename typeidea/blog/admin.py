@@ -66,7 +66,7 @@ class PostAdmin(BaseOwnerAdmin):
     # 文章后台管理界面
     exclude = ('owner', )
 
-    list_display = ('title', 'category', 'desc',  'status', 'created_time', 'owner', )
+    list_display = ('title', 'category', 'desc',  'status', 'created_time', 'owner', 'pv', 'uv')
 
     # fields = (('title', 'category', 'status'), 'desc', 'content', 'tag')
 

@@ -4,7 +4,13 @@
     <span>分类：{{ post.category.name }}</span>
     <span>作者：{{ post.owner.username }}</span>
 </div>
-<p>{{ post.content }}</p>
+{% if post.content_html %}
+    {% autoescape off %}
+    <p>{{ post.content_html }}</p>
+    {% endautoescape %}
+{% else %}
+    <p>{{ post.content }}</p>
+{% endif %}
 {% endif %}
 
 <hr/>
@@ -27,7 +33,9 @@
                 <span>{{ comment.created_time }}</span>
             </div>
             <div class="comment-content">
+                {% autoescape off %}
                 {{ comment.content }}
+                {% endautoescape %}
             </div>
         </li>
         {% endfor %}

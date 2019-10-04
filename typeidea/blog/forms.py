@@ -1,5 +1,6 @@
 from django import forms
 from .models import Comment
+import mistune
 
 """
 表单用来定义需要提交的内容和格式
@@ -42,12 +43,13 @@ class CommentForm(forms.ModelForm):
         content = self.cleaned_data.get('content')
         if len(content) < 10:
             raise forms.ValidationError('内容长度不能少于10个字符！')
+        content = mistune.markdown(content)
         return content
 
     def as_p(self):
-        "Return this form rendered as HTML <p>s."
+        "重写as_p"
         return self._html_output(
-            normal_row='<p%(html_class_attr)s>%(label)s  %(field)s%(help_text)s</p>',
+            normal_row='<p%(html_class_attr)s>%(label)s  %(field)s %(help_text)s</p>',
             error_row='%s',
             row_ender='</p>',
             help_text_html=' <span class="helptext">%s</span>',
