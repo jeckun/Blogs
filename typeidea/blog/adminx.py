@@ -5,13 +5,13 @@ from .models import Post, Tag, Category, Link, Comment, SideBar
 # Register your models here.
 
 
-# class BaseOwnerAdmin(admin.ModelAdmin):
-class BaseOwnerAdmin(object):     # 使用xadmin，将admin.ModelAdmin改为object
+class BaseOwnerAdmin(admin.ModelAdmin):
+# class BaseOwnerAdmin:     # 使用xadmin，将admin.ModelAdmin去掉
     """
     1、自动补充文章、分类、标签、侧边栏、友链这些Model的owner字段
     2、用来针对get_queryset过滤当前用户的数据
     """
-    # exclude = ('owner', )
+    exclude = ('owner', )
 
     def get_queryset(self, request):
         qs = super(BaseOwnerAdmin, self).get_queryset(request)

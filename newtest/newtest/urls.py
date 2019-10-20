@@ -22,7 +22,6 @@ from blog.views import PostViews, example, bootstrap, bootstrap_table, get_json,
 
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
     path('dhr/', dhr_index, name='dhr'),
     path('dhr/org/', dhr_org, name='org'),
     path('dhr/dept/', dhr_dept, name='dept'),
@@ -38,10 +37,7 @@ urlpatterns = [
     path('dhr/recruitment/', dhr_recruitment, name='recruitment'),
     path('dhr/training/', dhr_training, name='training'),
     path('dhr/performance/', dhr_performance, name='performance'),
-    # url(r'^dhr/$', dhr_index, name='dhr'),
-    # url(r'^dhr/org/$', dhr_org, name='org'),
-    # url(r'^dhr/emp/', dhr_emp, name='emp'),
-    # url(r'^dhr/job/', dhr_job_adj, name='job'),
+
     url(r'^$', PostViews.as_view(), name='Post'),
     url(r'^example/', example, name='example'),
     url(r'^bootstrap/', bootstrap, name='bootstrap'),

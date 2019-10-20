@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {% load staticfiles %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    
+    <title>你问我答</title>
+
+    <!-- Bootstrap core CSS -->
+<!--    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">-->
+
+<!--    <script src="{% static 'js/jquery.min.js' %}"></script>-->
+<!--    <script srr="{% static 'js/bootstrap.min.js' %}"></script>-->
+
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <!-- 自定义CSS-->
+    <link href="{% static 'css/my.css' %}" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav nav navbar-nav ">
+          <a class="blog-nav-item active" href="#">最新问答</a>
+          <a class="blog-nav-item" href="#">热门话题</a>
+          <a class="blog-nav-item" href="#">朋友圈</a>
+          <a class="blog-nav-item" href="#">About</a>
+        </nav>
+        <nav >
+            <form class="form-inline" action="/search/" method="GET">
+                <input class="form-control" type="search" name="keyword" placeholder="Search"
+                       aria-label="Search" value="{{ keyword }}">
+                <button class="btn btn-outline-success" type="submit">搜索</button>
+            </form>
+        </nav>
+        {% if request.user.is_authenticated %}
+        <nav class="blog-nav nav navbar-nav navbar-right">
+          <a class="blog-nav-item" href="admin/">{{ request.user }}</a>
+        </nav>
+        {% else %}
+        <nav class="blog-nav nav navbar-nav navbar-right">
+          <a class="blog-nav-item" href="#">注册</a>
+          <a class="blog-nav-item" href="admin/">登录</a>
+        </nav>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="container blog-panel">
+      <div class="blog-header">
+        <h1 class="blog-title">你问我答</h1>
+        <p class="lead blog-description">这是一个自由应答的空间，这里有{{ question_number }}个问题，快来找到你感兴趣的话题，跟大家聊聊吧。</p>
+      </div>
+      <div class="pager">
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myQuestion">
+            开始提问
+        </button>
+      </div>
+    {% block questions %}
+    {% endblock %}
+    </div>
+
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myQuestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        您的问题是
+                    </h4>
+                </div>
+                <form class="form-horizontal" role="questions_form" action="/" method="POST">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            {% load myfunc %}
+                            {{ questions_form.title|label_with_classes:'col-md-2 contal-label' }}
+                            <div class="col-md-10">
+                            {{ questions_form.title }}
+                            </div>
+                            {{ questions_form.content|label_with_classes:'col-md-2 contal-label' }}
+                            <div class="col-md-10">
+                            {{ questions_form.content }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            关闭
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            提交
+                        </button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <footer class="blog-footer">
+      <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </footer>
+
+</body>
+
+</html>
