@@ -33,7 +33,7 @@
   data-side-pagination="server"
   data-search="true"
   data-toggle="table"
-  data-url="{% url 'data.json' %}">
+  data-url="{% url 'table_data' %}">
   <thead>
     <tr>
       <th data-field="id">ID</th>
@@ -114,7 +114,7 @@
   </thead>
 <script>
 $('#table4').bootstrapTable({
-  url: '{% url 'data.json' %}',
+  url: '{% static 'json/data.json' %}',
   dataType: "json",
   pagination: true,                   //是否显示分页（*）
   sortable: true,                     //是否启用排序
@@ -143,13 +143,16 @@ $('#table4').bootstrapTable({
 <!--  {#height: 500,                      //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度#  }-->
 
 
-  columns: [{
+  columns: [
+  {
     field: 'id',
     title: 'Item ID'
-  }, {
+  },
+  {
     field: 'name',
     title: 'Item Name'
-  }, {
+  },
+  {
     field: 'price',
     title: 'Item Price'
   }]
