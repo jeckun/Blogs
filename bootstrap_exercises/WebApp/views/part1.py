@@ -1,14 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpRequest
 import json
+from ..config import APP_INF
 
 
 def index(request, *args, **kwargs):
     context = {}
-    context.update({
-        'title': 'Bootstrap练习',
-    })
-    return render(request, "base/home.html", context)
+    context.update(APP_INF)
+    return render(request, "base/index.html", context)
 
 
 def response(*args, **kwargs):
