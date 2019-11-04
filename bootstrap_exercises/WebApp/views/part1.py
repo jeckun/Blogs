@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpRequest
 import json
-from ..config import APP_INF
 
 
-def index(request, *args, **kwargs):
-    context = {}
-    context.update(APP_INF)
-    return render(request, "base/index.html", context)
+def bootstrap(request, **kwargs):
+  return render(request, "bootstrap.html", context=None)
+
+
+def bootstrap_table(request, **kwargs):
+  return render(request, "bootstrap_table.html", context=None)
 
 
 def response(*args, **kwargs):

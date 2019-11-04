@@ -28,24 +28,6 @@ def get_brand(context, *args):
 
 
 @register.simple_tag(takes_context=True)
-def get_menu(context, *args):
-    context = '<ul class="nav navbar-nav mr-auto">\n'
-    for item in APP_INF['NAV']['menu']:
-        if APP_INF['NAV']['menu'][item]['current']:
-            context += '<li class="nav-item active">\n'
-        else:
-            context += '<li class="nav-item">\n'
-        context += '<a href=\"%s\" class=\"%s\">%s ' % (APP_INF['NAV']['menu'][item]['url'], APP_INF['NAV']['menu'][item]['class'], item)
-        if APP_INF['NAV']['menu'][item]['current']:
-            context += '<span class="sr-only">(current)</span></a>\n'
-        else:
-            context += '</a>\n'
-        context += '</li>\n'
-    context += '</ul>\n'
-    return mark_safe(context)
-
-
-@register.simple_tag(takes_context=True)
 def get_search(context, *args):
     context = '<form class="navbar-form form-inline navbar-left" role="search">\n'
     context += '<input class="form-control mr-sm-2" type="text" placeholder="查找内容" aria-label="查找内容">\n'

@@ -21,7 +21,7 @@ APP_INF.update({
         },
         'menu': {
             '首页': {
-                'url': '',
+                'url': 'index',
                 'class': 'nav-link',
                 'current': True,
             },
@@ -33,12 +33,7 @@ APP_INF.update({
             '案例': {
                 'url': 'example',
                 'current': False,
-                'class': 'nav-link dropdown-toggle',
-                'dropdown-menu': {
-                    'Action1': {'url': '#', 'class': "dropdown-item"},
-                    'Action2': {'url': '#', 'class': "dropdown-item"},
-                    'Action3': {'url': '#', 'class': "dropdown-item"},
-                },
+                'class': 'nav-link',
             },
         },
     },
