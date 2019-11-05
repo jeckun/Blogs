@@ -1,6 +1,6 @@
-from .base import index, note, example
+from .base import  example, Note, Index
 from .part1 import get_json, bootstrap, bootstrap_table
 
 __all__ = (
-    'bootstrap', 'bootstrap_table', 'index', 'get_json', 'note',
+    'bootstrap', 'bootstrap_table', 'get_json', 'Note', 'Index',
 )

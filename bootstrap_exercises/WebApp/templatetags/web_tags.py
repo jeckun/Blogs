@@ -37,6 +37,11 @@ def get_search(context, *args):
 
 
 @register.simple_tag(takes_context=True)
+def get_pages(context, *args):
+    return render('widgets/pages.html', context=context)
+
+
+@register.simple_tag(takes_context=True)
 def nav(context, *args):
     """ 生成顶部导航条 """
     return render('widgets/navbar.html', context=context)
