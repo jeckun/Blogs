@@ -38,3 +38,16 @@ APP_INF.update({
         },
     },
 })
+
+APP_INF.update({
+    'channel': {
+        'note': {
+            'title': 'Bootstrap学习笔记',
+            'content': '这里是学习BootStrap过程中累计的经验和技巧，欢迎各位同学交流。',
+        },
+        'example': {
+            'title': '实例精选',
+            'content': '以下实例全部基于前面所讲的基本模板并配合 Bootstrap 的众多组件开发而成。我们鼓励你根据自身项目的需要对 Bootstrap 进行定制和修改。',
+        },
+    }
+})

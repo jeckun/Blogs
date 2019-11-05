@@ -1,0 +1,10 @@
+/* 自定义 CSS 文件 */
+/* 注释不能采用双斜线"//"方式，会导致整个文件失效 */
+
+h1.blog-title,
+h1.page-header,
+h2.blog-post-title {
+  margin-top: 10px;
+}
+
+
