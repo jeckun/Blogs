@@ -11,10 +11,12 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -31,13 +33,14 @@ ALLOWED_HOSTS = ['192.168.101.28']
 # Application definition
 
 INSTALLED_APPS = [
-    'WebApp',
     'django.contrib.admin',    # 管理员站点
     'django.contrib.auth',     # 认证授权系统
     'django.contrib.contenttypes',   # 内容类型框架
     'django.contrib.sessions',   # 会话框架
     'django.contrib.messages',   # 消息框架
     'django.contrib.staticfiles',  # 管理静态文件的框架
+    'WebApp',
+    'DjangoUeditor',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +131,5 @@ STATICFILES_DIR = {
     # os.path.join(BASE_DIR, 'static'),
 }
 
+MEDIA_URL ='/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

@@ -30,6 +30,6 @@ class TagAdmin(BaseOwnerAdmin):
 @admin.register(Post)
 class PostAdmin(BaseOwnerAdmin):
     list_display = ('title', 'content', 'owner', 'create_time')
-    fields = ('title', 'content', 'tag')
+    fields = ('title', 'ueditorcontent', 'content', 'tag')
     list_filter = ('title', )
     pass

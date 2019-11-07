@@ -9,11 +9,14 @@ h2.blog-post-title {
   margin-top: 20px;
 }
 
+.rounded-circle{
+  margin-bottom: 20px;
+}
+
 a:hover {
   color: red;
   text-decoration: none;
 }
-
 /* Pagination */
 .pager {
   margin: 50px auto;

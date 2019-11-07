@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView
 from django.contrib.auth.models import User
 from ..config import APP_INF
-from ..models import Post
+from ..models import Post, Tag
 
 
 # def index(request, *args, **kwargs):
@@ -43,10 +43,17 @@ class Note(ListView):
     paginate_by = 5
     context_object_name = 'Post'
     template_name = 'base/note.html'
+    readonly_fields = ('archive',)
 
     def get_context_data(self, **kwargs):
         """ 传递问题表单进行渲染 """
         context = super().get_context_data(**kwargs)
+        context.update({
+            'Users': Post.get_active_user(Post),
+        })
+        context.update({
+            'Tags': Tag.objects.all(),
+        })
         update_app_inf_nav_menu_current('note')
         context.update(APP_INF)
         return context
