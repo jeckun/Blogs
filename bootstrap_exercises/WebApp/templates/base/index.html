@@ -1,4 +1,6 @@
 {% extends 'base/base.html' %}
+{% load web_tags %}
+
 {% block title %}{{ title }} - Home{% endblock %}
 
 <!-- 内容区域 -->
@@ -6,11 +8,9 @@
 <!-- 首页的巨幕 -->
 <div class="container">
   <div class="jumbotron">
-      <h1 class="display-3">{{ title }}</h1>
-      <p>这里是我学习Bootstrap的笔记，Bootstrap是非常棒的前端框架。有非常多可重复使用的网页元素和小
-      部件，可以帮助我们快速搭建一个美观的网站。不论你是想做一个网店，还是一个新闻网站，还是一个博客，
-      Bootstrap都可以胜任。</p>
-      <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+      <h1 class="display-3">{{ CHANNEL.index.title }}</h1>
+      <p>{{ CHANNEL.index.content }}</p>
+      <p><a class="btn btn-primary btn-lg" href="{% url 'note' %}" role="button">Learn more</a></p>
   </div>
 </div>
 
@@ -18,8 +18,8 @@
 <div class="container">
   <div class="row text-center">
       <div class="col-md-4">
-          <div class="thumbnail">
-              <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+          <div class="thumbnail shadow p-3 mb-5 bg-white rounded">
+              <img class="img-thumbnail rounded-circle" src="{% media 'ico/12231212.png' %}" alt="Placeholder" width="140" height="140">
               <div class="caption">
                   <h3>全局CSS样式</h3>
                   <p>设置全局 CSS 样式；基本的 HTML 元素均可以通过 class 设置样式并得到增强效果；还有先进的栅格系统。 </p>
@@ -28,18 +28,18 @@
           </div>
       </div>
       <div class="col-md-4">
-          <div class="thumbnail">
-              <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+          <div class="thumbnail shadow p-3 mb-5 bg-white rounded">
+              <img class="img-thumbnail rounded-circle" src="{% media 'ico/34233231.png' %}" alt="Placeholder" width="140" height="140">
               <div class="caption">
                   <h3>组件</h3>
-                  <p>无数可复用的组件，包括字体图标、下拉菜单、导航、警告框、弹出框等更多功能。 </p>
+                  <p>这里有无数可复用的组件，包括常见字体图标、下拉菜单、导航、警告框、弹出框等更多功能。 </p>
                   <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
               </div>
           </div>
       </div>
       <div class="col-md-4">
-          <div class="thumbnail">
-              <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+          <div class="thumbnail shadow p-3 mb-5 bg-white rounded">
+              <img class="img-thumbnail rounded-circle" src="{% media 'ico/34213134.png' %}" alt="Placeholder" width="140" height="140">
               <div class="caption">
                   <h3>JavaScript 插件</h3>
                   <p>jQuery 插件为 Bootstrap 的组件赋予了“生命”。可以简单地一次性引入所有插件，或者逐个引入到你的页面中。 </p>
@@ -55,7 +55,9 @@
   <div class="row featurette">
       {% if forloop.counter0|divisibleby:2 %}
       <div class="col-md-7">
-        <h2 class="featurette-heading">{{ forloop.counter }} {{ post.title }} <span class="text-muted">{{ post.owner }}</span></h2>
+        <a href="{% url 'noteDetail' post.id %}">
+            <h2 class="featurette-heading">{{ forloop.counter }} {{ post.title }} <a href="{% url 'author' post.owner.id %}"><span class="text-muted">{{ post.owner }}</span></a></h2>
+        </a>
         <p class="lead">{{ post.content }}</p>
       </div>
       <div class="col-md-5">
@@ -66,7 +68,9 @@
         <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
       </div>
       <div class="col-md-7">
-        <h2 class="featurette-heading">{{ forloop.counter }} {{ post.title }} <span class="text-muted">{{ post.owner }}</span></h2>
+        <a href="{% url 'noteDetail' post.id %}">
+            <h2 class="featurette-heading">{{ forloop.counter }} {{ post.title }} <a href="{% url 'author' post.owner.id %}"><span class="text-muted">{{ post.owner }}</span></a></h2>
+        </a>
         <p class="lead">{{ post.content }}</p>
       </div>
       {% endif %}

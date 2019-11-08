@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+{% load web_tags %}
+
+{% block title %}{{ post.title }} - {{ title }}{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="featurette-divider">
+        <h2 class="blog-post-title">{{ post.title }}</h2>
+        <p class="blog-post-meta">{{ post.create_time }}
+          <a href="{% url 'author' post.owner.id %}">{{ post.owner }}</a>
+          {% for tag in post|tag %}
+            <span class="badge badge-secondary">{{ tag }} </span>
+          {% endfor %}
+        </p>
+        <hr class="featurette-divider">
+        {% autoescape off %}
+        <p>{{ post.ueditorcontent }}</p>
+        {% endautoescape %}
+    </div><!-- /.blog-main -->
+</div>
+{% endblock %}

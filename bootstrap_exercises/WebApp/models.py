@@ -24,6 +24,7 @@ class Post(models.Model):
     ueditorcontent = UEditorField(width=1200, height=300, toolbars="full", imagePath="images/", filePath="files/", upload_settings={"imageMaxSize": 1204000}, settings={}, verbose_name='正文', default=None, null=True, blank=True)
     tag = models.ManyToManyField(Tag, verbose_name='标签')
     owner = models.ForeignKey(User, verbose_name='作者', on_delete=models.SET_NULL, blank=True, null=True)
+    likes = models.IntegerField(verbose_name='点赞', default=0, blank=True, null=True)
     create_time = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
 
     def __str__(self):
@@ -36,6 +37,13 @@ class Post(models.Model):
 
     def get_tags(self):
         return Tag.objects.filter(pk__in=self.tag).values('tag')
+
+    def order(self, field=None, num=0):
+        """ 返回按指定字段排序后的前num条记录 """
+        if num==0:
+            return self.objects.all().order_by(field)
+        else:
+            return self.objects.all().order_by(field)[:num]
 
     def archive(self):
         """ 归档年月 """

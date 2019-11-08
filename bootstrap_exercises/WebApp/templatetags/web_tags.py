@@ -1,4 +1,3 @@
-import datetime
 from django import template
 from django.utils.safestring import mark_safe
 from django.forms.renderers import get_default_renderer
@@ -12,7 +11,7 @@ Context = template.Context()
 
 @register.filter(name='tag')
 def tag(post):
-    """ 从post中提取tag并返回tag名称数组 """
+    """ 获得每篇文章的tag数组 """
     p = post.tag.all()
     return [t.tag for t in p]
 
@@ -34,19 +33,9 @@ def get_archive_num(archive):
     return len([u for u in Post.objects.all() if u.archive()==archive])
 
 
-@register.simple_tag(takes_context=True)
-def get_month(context, *args):
-    today = datetime.date.today()
-    a = today.strftime("%Y-%m")
-    return today.strftime("%Y-%m")
-
-
-@register.simple_tag(takes_context=True)
-def get_last_month(context, *args):
-    today = datetime.date.today()
-    last_month = today + datetime.timedelta(days=-today.day)
-    a = last_month.strftime("%Y-%m")
-    return last_month.strftime("%Y-%m")
+@register.filter(name='get_post_likes')
+def get_post_likes(post):
+    return post.likes
 
 
 @register.simple_tag(takes_context=True)  # 注册get_meta为一个标签
@@ -82,6 +71,12 @@ def get_search(context, *args):
 @register.simple_tag(takes_context=True)
 def get_pages(context, *args):
     return render('widgets/pages.html', context=context)
+
+
+@register.simple_tag(takes_context=True)
+def media(context, *args):
+    url = context.request._current_scheme_host + "/media/" + args[0]
+    return url
 
 
 @register.simple_tag(takes_context=True)

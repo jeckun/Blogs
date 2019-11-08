@@ -14,14 +14,17 @@
       <div class="row">
         <div class="col-sm-8 blog-main">
           {% for post in Post %}<!-- 显示文章 -->
-          <div class="blog-post">
-            <h2 class="blog-post-title">{{ post.title }}</h2>
+          <div class="blog-post shadow p-3 mb-5 bg-white rounded">
+            <a href="{% url 'noteDetail' post.id %}">
+            <h3 class="blog-post-title">{{ post.title }}</h3>
+            </a>
             <p class="blog-post-meta">{{ post.create_time }}
-              <a href="#">{{ post.owner }}</a>
+              <a href="{% url 'author' post.owner.id %}">{{ post.owner }}</a>
               {% for tag in post|tag %}
                 <span class="badge badge-secondary">{{ tag }} </span>
               {% endfor %}
             </p>
+            <hr class="featurette-divider">
             <p>{{ post.content }}</p>
           </div><!-- /.blog-post -->
           {% endfor %}
@@ -31,47 +34,57 @@
         </div><!-- /.blog-main -->
 
         <!-- 侧边栏筛选器 -->
-        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-          <div class="sidebar-module sidebar-module-inset">
-            <h4>关于</h4>
-            <p>{{ About }}</p>
-          </div>
-          <div class="sidebar-module">
-            <h4>活跃用户</h4>
-            <ol class="list-unstyled">
-              {% for user in Users %}
-              <li><a href="#">{{ user.username }}
-                <span class="badge badge-secondary">{{ user|get_user_num }}</span>
-              </a></li>
-              {% endfor %}
-            </ol>
-          </div>
-          <div class="sidebar-module">
-            <h4>标签</h4>
-            <ol class="list-unstyled">
-              {% for tag in Tags %}
-              <li><a href="#">{{ tag.tag }}
-                <span class="badge badge-secondary">{{ tag|get_tag_num }}</span>
-                <!--通过get_tag_num过滤器获得每个标签关联的文章数量-->
-              </a></li>
-              {% endfor %}
-            </ol>
-          </div>
-          <div class="sidebar-module">
-            <h4>归档</h4>
-            <ol class="list-unstyled">
-              <li><a href="#">{% get_month %} <span class="badge badge-secondary">{{ get_month|get_archive_num }}</span></a></li>
-              <li><a href="#">{% get_last_month %} <span class="badge badge-secondary">{{ get_last_month|get_archive_num }}</span></a></li>
-              <li><a href="#">2019-09 <span class="badge badge-secondary">{{ '2019-09'|get_archive_num }}</span></a></li>
-            </ol>
-          </div>
-          <div class="sidebar-module">
-            <h4>评论</h4>
-            <ol class="list-unstyled">
-              <li><a href="#">GitHub <span class="badge badge-secondary">22</span></a></li>
-              <li><a href="#">Twitter <span class="badge badge-secondary">12</span></a></li>
-              <li><a href="#">Facebook <span class="badge badge-secondary">11</span></a></li>
-            </ol>
+        <div class="col-sm-3 col-sm-offset-1">
+          <div class=" blog-sidebar shadow p-3 mb-5 bg-white rounded ">
+            <div class="sidebar-module sidebar-module-inset">
+              <h4>关于</h4>
+              <p>{{ About }}</p>
+            </div>
+            <div class="sidebar-module">
+              <h4>活跃用户</h4>
+              <ol class="list-unstyled">
+                {% for user in Users %}
+                <li><a href="{% url 'author' user.id %}">{{ user.username }}
+                  <span class="badge badge-secondary">{{ user|get_user_num }}</span>
+                </a></li>
+                {% endfor %}
+              </ol>
+            </div>
+            <div class="sidebar-module">
+              <h4>最赞文章</h4>
+              <ol class="list-unstyled">
+                {% for post_item in Post_like_list %}
+                <li><a href="{% url 'noteDetail' post_item.id %}">{{ post_item.title }} <span class="badge badge-secondary">{{ post_item|get_post_likes }}</span></a></li>
+                {% endfor %}
+              </ol>
+            </div>
+            <div class="sidebar-module">
+              <h4>标签</h4>
+              <ol class="list-unstyled">
+                {% for tag in Tags %}
+                <li><a href="{% url 'tag' tag.id %}">{{ tag.tag }}
+                  <span class="badge badge-secondary">{{ tag|get_tag_num }}</span>
+                  <!--通过get_tag_num过滤器获得每个标签关联的文章数量-->
+                </a></li>
+                {% endfor %}
+              </ol>
+            </div>
+            <div class="sidebar-module">
+              <h4>归档</h4>
+              <ol class="list-unstyled">
+                {% for month in Months %}
+                <li><a href="#">{{ month }} <span class="badge badge-secondary">{{ month|get_archive_num }}</span></a></li>
+                {% endfor %}
+              </ol>
+            </div>
+            <div class="sidebar-module">
+              <h4>评论</h4>
+              <ol class="list-unstyled">
+                <li><a href="#">GitHub <span class="badge badge-secondary">22</span></a></li>
+                <li><a href="#">Twitter <span class="badge badge-secondary">12</span></a></li>
+                <li><a href="#">Facebook <span class="badge badge-secondary">11</span></a></li>
+              </ol>
+            </div>
           </div>
         </div><!-- /.blog-sidebar -->
 
